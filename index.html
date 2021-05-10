@@ -28,49 +28,122 @@
 </div>
 
 
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropdown button
-    </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-      <li><a class="dropdown-item" href="#">Action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Something else here</a></li>
-    </ul>
+
+
+
+  <div class="dropdown">
+    <button class="dropbtn">Ingrédients</button>
+    <i class="bi bi-chevron-down"></i>
+   
+    <div id="myDropdown" class="dropdown-content">
+      <input type="text" placeholder="Rechercher un ingrédient" id="myInput" onkeyup="filterFunction()">
+      <i class="bi bi-chevron-up"></i>
+      <a href="#about">About</a>
+      <a href="#base">Base</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+      <a href="#custom">Custom</a>
+      <a href="#support">Support</a>
+      <a href="#tools">Tools</a>
+    </div>
   </div>
 
 
-<div class="container">
- <section class='row'>
-     <div class='col-3'>
-                <div class='img'></div>
-                
-        <div class='recette__complete'>     
-            <div class='infos_principale'>
-            <span class='title__recette'>Titre de la recette</span>
-            
-            <div>
-            <span class='time__logo'><i class="bi bi-clock"></i></span>
-            <span class='time'>60min</span>
-            </div>
+<main class='recettes__card'>
+  <article class='col-3'>
+    <div class='img'></div>
+    
+ <div class='recette__complete'>     
+    <div class='infos_principale'>
+    <span class='title__recette'>Titre de la recette</span>
 
-            </div>
+    <div>
+    <span class='time__logo'><i class="bi bi-clock"></i></span>
+   <span class='time'>60min</span>
+   </div>
+ </div>
 
-            <div class="contenu">
-            <div class='ingredient'>liste des ingredients</div>
-            <div class=' recettes'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
-                Deserunt accusamus exercitationem deleniti nam pariatur. Quas optio voluptas minus, 
-                at accusantium quibusdam earum
-                perferendis tempora in, nisi incidunt asperiores laborum omnis.</div>
-            </div>
-        </div>
-    </div>
+  <div class="contenu">
+   <div class='ingredient'>liste des ingredients</div>
+   <div class=' recettes'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+    Deserunt accusamus exercitationem deleniti nam pariatur. Quas optio voluptas minus, 
+    at accusantium quibusdam earum
+    perferendis tempora in, nisi incidunt asperiores laborum omnis.</div>
+   </div>
+</div>
+</article>
+
+
+<article class='col-3'>
+    <div class='img'></div>
+    
+<div class='recette__complete'>     
+<div class='infos_principale'>
+<span class='title__recette'>Titre de la recette</span>
+
+<div>
+<span class='time__logo'><i class="bi bi-clock"></i></span>
+<span class='time'>60min</span>
+</div>
 
 </div>
 
+<div class="contenu">
+<div class='ingredient'>liste des ingredients</div>
+<div class=' recettes'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+    Deserunt accusamus exercitationem deleniti nam pariatur. Quas optio voluptas minus, 
+    at accusantium quibusdam earum
+    perferendis tempora in, nisi incidunt asperiores laborum omnis.</div>
+</div>
+</div>
+</article>
+<article class='col-3'>
+    <div class='img'></div>
+    
+<div class='recette__complete'>     
+<div class='infos_principale'>
+<span class='title__recette'>Titre de la recette</span>
+
+<div>
+<span class='time__logo'><i class="bi bi-clock"></i></span>
+<span class='time'>60min</span>
+</div>
+
+</div>
+
+<div class="contenu">
+<div class='ingredient'>liste des ingredients</div>
+<div class=' recettes'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+    Deserunt accusamus exercitationem deleniti nam pariatur. Quas optio voluptas minus, 
+    at accusantium quibusdam earum
+    perferendis tempora in, nisi incidunt asperiores laborum omnis.</div>
+</div>
+</div>
+</article>
+
+<article class='col-3'>
+    <div class='img'></div>
+    
+<div class='recette__complete'>     
+<div class='infos_principale'>
+<span class='title__recette'>Titre de la recette</span>
+
+<div>
+<span class='time__logo'><i class="bi bi-clock"></i></span>
+<span class='time'>60min</span>
+</div>
+
+</div>
+
+<div class="contenu">
+<div class='ingredient'>liste des ingredients</div>
+<div class=' recettes'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+    Deserunt accusamus exercitationem deleniti nam pariatur. Quas optio voluptas minus, 
+    at accusantium quibusdam earum
+    perferendis tempora in, nisi incidunt asperiores laborum omnis.</div>
+</div>
+</div>
+</article>
 
 
 
@@ -78,7 +151,7 @@
 
 
 
-
+</main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
     <script src="index.js"></script>
