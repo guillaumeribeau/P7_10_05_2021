@@ -5,24 +5,10 @@ chevronDown.addEventListener('click',()=>{
 
 const myDropdown=  document.getElementById("myDropdown");
 myDropdown.classList.toggle("show");
-const btnDrop= document.querySelector('.dropbtn')
-btnDrop.style.opacity='0'
-const chevronUp= document.querySelector('.bi-chevron-up')
-chevronUp.style.display='block'
-})
-
-chevronUp.addEventListener('click',()=>{
-    const myDropdown=  document.getElementById("myDropdown");
-    myDropdown.classList.toggle("show");
-    const btnDrop= document.querySelector('.dropbtn')
-    btnDrop.style.opacity='1'
-   // const chevronUp= document.querySelector('.bi-chevron-up')
-    //chevronUp.style.display='block'
-
-
+const placeholder= document.getElementById('myInput');
+placeholder.setAttribute("placeholder",'Recherche par ingrédients')
 
 })
-
 
 
 
