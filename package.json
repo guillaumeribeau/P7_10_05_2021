@@ -1,0 +1,23 @@
+{
+  "name": "p7_10_05_2021",
+  "version": "1.0.0",
+  "description": "les petits plats",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./scss/style.scss:./css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guillaumeribeau/P7_10_05_2021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guillaumeribeau/P7_10_05_2021/issues"
+  },
+  "homepage": "https://github.com/guillaumeribeau/P7_10_05_2021#readme",
+  "dependencies": {
+    "bootstrap": "^5.0.0",
+    "bootstrap-icons": "^1.4.1"
+  }
+}

@@ -1,0 +1,144 @@
+@import "variable_overrides.scss";
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'DM sans', sans-serif;
+}
+
+
+.header{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center ;
+}
+.title{
+    color:#D04F4F;
+    font-size:36px;
+    width: 268px;
+}
+
+
+
+.bar__search{
+    position: relative;
+}
+
+#search {
+
+width: 90%;
+height: 69px;
+border-radius: 5px;
+padding-left: 20px;
+font-family:18px;
+margin: 20px 100px 20px 100px;
+background-color: #E7E7E7;
+border: none;
+
+}
+
+.icone{
+    position:absolute;
+    font-size: 32px;
+    top:30px;
+    right: 20px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+// .btn-secondary{
+//     width: 170px;
+//     height: 69px;
+//     border-radius: 5px;
+//     background: #3282F7;
+ 
+// }
+
+// .dropdown-menu{
+// background: #3282F7;
+
+// }
+
+
+
+.img{
+background: #C7BEBE;
+width: 380px;
+height: 178px;
+border-top-left-radius:5px;
+border-top-right-radius:5px;
+
+}
+
+.recette__complete{
+    width: 380px;
+    height:194px;
+background: #E7E7E7;
+border-bottom-left-radius:5px;
+border-bottom-right-radius:5px;
+
+}
+
+
+.infos_principale{
+    display: flex;
+    justify-content: space-between;
+    padding-top:20px;
+    font-family: 'Lato';
+font-size: 18px;
+font-style: normal;
+font-weight: 700;
+line-height: 22px;
+color: #000000;
+   
+    
+}
+.title__recette{
+
+margin-left: 20px;
+
+}
+.time{
+    margin-right: 20px;
+}
+
+.bi-clock{
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.contenu{
+    margin-top: 20px;
+display: flex;
+justify-content: space-between;
+flex-wrap: nowrap;
+
+}
+
+
+
+.ingredient{
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-right: 70px;
+    font-family: 'Lato';
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 14px;
+    letter-spacing: 0em;
+}
+
+.recettes{
+    text-overflow: ellipsis;
+    margin-right: 20px;
+font-family: 'Roboto';
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 12px;
+
+}
