@@ -10913,14 +10913,12 @@ textarea.form-control-lg {
 
 .ingredient {
   margin-left: 20px;
-  margin-top: 20px;
-  margin-right: 70px;
+  margin-right: 20px;
   font-family: "Lato";
-  font-size: 12px;
+  font-size: 10px;
   font-style: normal;
   font-weight: 700;
-  line-height: 14px;
-  letter-spacing: 0em;
+  line-height: 10px;
 }
 
 .recettes {
