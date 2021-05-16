@@ -1,33 +1,77 @@
-
-
-
+import {recipes} from './recipes.js'
 
 const dropIngredient=  document.getElementById("drop_ingredients");
-const dropRecipient=  document.getElementById("drop_recipients");
+const dropAppareil=  document.getElementById("drop_appareils");
 const dropUstensile=  document.getElementById("drop_ustensiles");
 
 const chevronIngredient= document.getElementById('btn_ingredients');
-const chevronRecipient= document.getElementById('btn_recipients');
-const chevronUstensile= document.getElementById('btn_ustensiles')
-;
+const chevronAppareil= document.getElementById('btn_appareils');
+const chevronUstensile= document.getElementById('btn_ustensiles');
 
-const chevronUp= document.querySelector('.bi-chevron-up');
-const inputTags= document.getElementById('myInput');
-
+const inputIngredient= document.getElementById('input_ingredients');
+const inputAppareil= document.getElementById('input_appareils');
+const inputUstensile= document.getElementById('input_ustensiles');
 
 chevronIngredient.addEventListener('click',()=>{
-  dropIngredient.classList.toggle("show");
-  
-  })
+dropIngredient.classList.toggle("show");
+})
 
-  chevronRecipient.addEventListener('click',()=>{
-    dropRecipient.classList.toggle("show");
-    
-    })
-    chevronUstensile.addEventListener('click',()=>{
-      dropUstensile.classList.toggle("show");
-      
-      })
+chevronAppareil.addEventListener('click',()=>{
+dropAppareil.classList.toggle("show");
+})
+
+chevronUstensile.addEventListener('click',()=>{
+dropUstensile.classList.toggle("show");
+})
+
+
+
+
+// fonction qui recupères la liste des ingredient, ustensile ou appareils
+
+function afficherLiAppareil(){
+const appareil = recipes.map(item=>item.appliance);
+let tableauAppareil = [...new Set(appareil.concat(appareil))] // retires les doublons
+console.log(tableauAppareil)
+const liAppareil=tableauAppareil.map(item=>{
+  return `
+ <li class='list_utensiles'>${item}</li>`
+}).join('')
+dropAppareil.innerHTML=liAppareil;
+}
+afficherLiAppareil()
+
+
+function afficherLiUstensil(){
+  
+const ustensil = recipes.map(item=>item.ustensils);
+for (let valeur of ustensil){
+  const test=valeur.map(item=>item)
+  
+}
+console.log(ustensil)
+ 
+}
+
+
+
+  afficherLiUstensil()
+  
+
+
+
+  // let tableauUstensils = [...new Set(ustensil.concat(ustensil))] // retires les doublons
+  // console.log(tableauUstensils)
+  // const liUstensil=tableauUstensils.map(item=>{
+  //   return `
+  //  <li class='list_utensiles'>${item}</li>`
+  // }).join('')
+  // dropUstensile.innerHTML=liUstensil;
+
+
+
+
+
 
   // function filterFunction() {
   //   let filter, ul, li, a, i;

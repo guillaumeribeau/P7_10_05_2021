@@ -1,4 +1,266 @@
 @charset "UTF-8";
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #3282F7;
+}
+
+/* The search field */
+#input_ingredients {
+  display: block;
+  height: 69px;
+  width: 100%;
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  background-color: #3282F7;
+  font-size: 16px;
+  padding: 14px 50px 12px 10px;
+  color: #f1f1f1;
+  border-radius: 5px;
+  border-bottom: 1px solid #ddd;
+}
+#input_ingredients::placeholder {
+  color: white;
+}
+
+#input_appareils {
+  display: block;
+  height: 69px;
+  width: 100%;
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  background-color: #68D9A4;
+  color: #f1f1f1;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 14px 50px 12px 10px;
+  border-bottom: 1px solid #ddd;
+}
+#input_appareils::placeholder {
+  color: white;
+}
+
+#input_ustensiles {
+  display: block;
+  height: 69px;
+  width: 100%;
+  background-position: 14px 12px;
+  background-repeat: no-repeat;
+  background-color: #ED6454;
+  font-size: 16px;
+  color: #f1f1f1;
+  padding: 14px 50px 12px 10px;
+  border-radius: 5px;
+  border-bottom: 1px solid #ddd;
+}
+#input_ustensiles::placeholder {
+  color: white;
+}
+
+/* The search field when it gets focus/clicked on */
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 100px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content-ingredients {
+  display: none;
+  position: absolute;
+  font-family: Lato;
+  margin-bottom: 100px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 18px;
+  background-color: #3282F7;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+.dropdown-content-ingredients a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content-appareils {
+  display: none;
+  position: absolute;
+  font-family: Lato;
+  margin-bottom: 100px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 18px;
+  background-color: #68D9A4;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+.dropdown-content-appareils a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content-ustensiles {
+  display: none;
+  position: absolute;
+  font-family: Lato;
+  margin-bottom: 100px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 18px;
+  background-color: #ED6454;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+.dropdown-content-ustensiles a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu */
+.show {
+  display: grid;
+  grid-template-columns: repeat(3, 3fr);
+}
+
+.bi-chevron-down {
+  position: absolute;
+  right: 30px;
+  top: 25px;
+  font-size: 20px;
+  color: #f1f1f1;
+  cursor: pointer;
+}
+
+.bi-chevron-up {
+  display: block;
+  position: absolute;
+  right: 5px;
+  top: 15px;
+  font-size: 20px;
+  color: black;
+  cursor: pointer;
+  z-index: 100;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+}
+
+li {
+  color: white;
+  list-style: none;
+  padding: 10px;
+  cursor: pointer;
+}
+li:hover {
+  color: black;
+}
+
+.icone {
+  position: absolute;
+  font-size: 32px;
+  top: 30px;
+  right: 20px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+
+.recettes__card {
+  display: grid;
+  grid-template-columns: repeat(3, 3fr);
+  margin-top: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.img {
+  background: #C7BEBE;
+  width: 380px;
+  height: 178px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
+}
+
+.recette__complete {
+  width: 380px;
+  height: 194px;
+  overflow: hidden;
+  margin-right: 50px;
+  margin-bottom: 50px;
+  background: #E7E7E7;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
+}
+
+.infos_principale {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  font-family: "Lato";
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22px;
+  color: #000000;
+}
+
+.title__recette {
+  margin-left: 20px;
+}
+
+.time {
+  margin-right: 20px;
+}
+
+.bi-clock {
+  font-size: 20px;
+  margin-right: 5px;
+}
+
+.contenu {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.ingredient {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-family: "Lato";
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 10px;
+}
+
+.recettes {
+  text-overflow: ellipsis;
+  margin-right: 20px;
+  font-family: "Roboto";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 12px;
+}
+
 /*!
  * Bootstrap v5.0.0 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
@@ -10758,177 +11020,6 @@ textarea.form-control-lg {
   margin: 20px 100px 20px 100px;
   background-color: #E7E7E7;
   border: none;
-}
-
-/* Dropdown Button */
-/* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
-  background-color: #3282F7;
-}
-
-/* The search field */
-#myInput {
-  display: block;
-  height: 69px;
-  width: 100%;
-  background-position: 14px 12px;
-  background-repeat: no-repeat;
-  background-color: #3282F7;
-  font-size: 16px;
-  padding: 14px 50px 12px 10px;
-  z-index: 100;
-  border-bottom: 1px solid #ddd;
-}
-#myInput::placeholder {
-  color: white;
-}
-
-/* The search field when it gets focus/clicked on */
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-  margin-left: 100px;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  font-family: Lato;
-  margin-bottom: 100px;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 18px;
-  background-color: #3282F7;
-  min-width: 230px;
-  border: 1px solid #ddd;
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: white;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
-}
-
-/* Show the dropdown menu */
-.show {
-  display: block;
-}
-
-.bi-chevron-down {
-  position: absolute;
-  right: 30px;
-  top: 25px;
-  font-size: 20px;
-  color: #f1f1f1;
-  cursor: pointer;
-}
-
-.bi-chevron-up {
-  display: block;
-  position: absolute;
-  right: 5px;
-  top: 15px;
-  font-size: 20px;
-  color: black;
-  cursor: pointer;
-  z-index: 100;
-}
-
-.icone {
-  position: absolute;
-  font-size: 32px;
-  top: 30px;
-  right: 20px;
-  padding-left: 10px;
-  cursor: pointer;
-}
-
-.recettes__card {
-  display: grid;
-  grid-template-columns: repeat(3, 3fr);
-  margin-top: 200px;
-  margin-left: 100px;
-  margin-right: 100px;
-}
-
-.img {
-  background: #C7BEBE;
-  width: 380px;
-  height: 178px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.recette__complete {
-  width: 380px;
-  height: 194px;
-  margin-right: 50px;
-  margin-bottom: 50px;
-  background: #E7E7E7;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.infos_principale {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 20px;
-  font-family: "Lato";
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
-  color: #000000;
-}
-
-.title__recette {
-  margin-left: 20px;
-}
-
-.time {
-  margin-right: 20px;
-}
-
-.bi-clock {
-  font-size: 20px;
-  margin-right: 5px;
-}
-
-.contenu {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-}
-
-.ingredient {
-  margin-left: 20px;
-  margin-right: 20px;
-  font-family: "Lato";
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 10px;
-}
-
-.recettes {
-  text-overflow: ellipsis;
-  margin-right: 20px;
-  font-family: "Roboto";
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 12px;
 }
 
 /*# sourceMappingURL=style.css.map */
