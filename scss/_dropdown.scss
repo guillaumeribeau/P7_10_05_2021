@@ -142,7 +142,7 @@ a{
   /* Show the dropdown menu */
   .show {
 display:grid;
-grid-template-columns: repeat(3,3fr);
+grid-template-columns: repeat(6,3fr);
 
 
 }
@@ -177,6 +177,7 @@ flex-direction: row;
 }
 
 li{
+    font-size: 12px;
     color:white;
     list-style: none;
     padding: 10px;

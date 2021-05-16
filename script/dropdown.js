@@ -29,48 +29,60 @@ dropUstensile.classList.toggle("show");
 
 // fonction qui recupères la liste des ingredient, ustensile ou appareils
 
+// affiches la liste des Appareils
 function afficherLiAppareil(){
 const appareil = recipes.map(item=>item.appliance);
 let tableauAppareil = [...new Set(appareil.concat(appareil))] // retires les doublons
 console.log(tableauAppareil)
-const liAppareil=tableauAppareil.map(item=>{
+let liAppareil=tableauAppareil.map(item=>{
   return `
- <li class='list_utensiles'>${item}</li>`
+ <li class='list_appareils'>${item}</li>`
 }).join('')
 dropAppareil.innerHTML=liAppareil;
 }
 afficherLiAppareil()
 
 
+// afficher la liste des ustensiles
 function afficherLiUstensil(){
-  
+  let tableauUstens=[]
 const ustensil = recipes.map(item=>item.ustensils);
 for (let valeur of ustensil){
-  const test=valeur.map(item=>item)
-  
+  for (let j=0; j<valeur.length; j++){
+  tableauUstens.push(valeur[j])
+  }
 }
-console.log(ustensil)
+let tableauUstensils= [...new Set(tableauUstens.concat(tableauUstens))]
+let liUstensils= tableauUstensils.map(item=>{
+return `<li class='list_utensiles'>${item}</li>`
+
+}).join('')
+dropUstensile.innerHTML=liUstensils;
  
 }
+afficherLiUstensil()
+
+// afficher les ingredients dans la liste
+function afficherIngredient(){
+let tableauIngred=[];
+const ingredient= recipes.map(item=>item.ingredients);
+console.log(ingredient)
+for (let valeur of ingredient){
+  for (let j=0; j<valeur.length; j++){
+    console.log(valeur[j]["ingredient"])
+ tableauIngred.push(valeur[j]["ingredient"])
+}
+}
+let tableauIngredients=[...new Set(tableauIngred.concat(tableauIngred))]
+let liIngredient= tableauIngredients.map(item=>{
+return`<li class='list_ingredients'>${item}</li>`
+}).join('')
+dropIngredient.innerHTML=liIngredient;
+}
+afficherIngredient()
 
 
-
-  afficherLiUstensil()
   
-
-
-
-  // let tableauUstensils = [...new Set(ustensil.concat(ustensil))] // retires les doublons
-  // console.log(tableauUstensils)
-  // const liUstensil=tableauUstensils.map(item=>{
-  //   return `
-  //  <li class='list_utensiles'>${item}</li>`
-  // }).join('')
-  // dropUstensile.innerHTML=liUstensil;
-
-
-
-
 
 
   // function filterFunction() {
