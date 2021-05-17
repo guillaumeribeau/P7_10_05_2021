@@ -172,15 +172,25 @@ li:hover {
   color: black;
 }
 
+.tags {
+  display: flex;
+  margin-left: 20px;
+}
+
 .tags_li {
   display: flex;
   justify-content: space-between;
   height: 30px;
   width: 150px;
+  margin-right: 20px;
   color: white;
   padding: 5px;
   border-radius: 5px;
   background-color: #68D9A4;
+}
+
+.bi-x-circle {
+  cursor: pointer;
 }
 
 .icone {

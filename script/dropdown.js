@@ -114,24 +114,43 @@ afficherListTrier(listAppareils,search)
 })
 
 // affiches les tags lorque qu'on cliques sur un élements
+const tags= document.querySelector('.tags')
 
-function afficherTags(){
+function afficherTags(liste){
+  
+for (let value of liste){
 
-  for (let value of listAppareils){
   value.addEventListener('click', ()=>{
-  let txtValue=value.textContent || value.innerText;
-  return` <div class='tags_li'>
-  <span class='essai'>${textValue}</span>
+let txtValue=value.textContent || value.innerText;
+   
+ tags.innerHTML+=` <div class='tags_li'>
+  <span class='tags_value'>${txtValue}</span>
   <i class="bi bi-x-circle"></i>
  </div>`
-  })
+})
 
- }
+}
+}
+afficherTags(listAppareils);
+afficherTags(listUtensiles);
+afficherTags(listIngredient);
+ 
+// Enlever les tags au click sur la croix
+ 
+function enleverTags(){
+const croixTags= document.querySelectorAll('.bi-x-circle')
+console.log(croixTags)
+
+for (let value of croixTags){
+  console.log(value)
+  value.addEventListener('click',()=>{
+const tagsList= document.querySelector('.tags_li')
+console.log(tagsList)
+tagsList.style.display='none'
+})
 
 }
 
-afficherTags()
- 
-
-
+}
+enleverTags()
 
