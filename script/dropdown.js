@@ -25,8 +25,6 @@ dropUstensile.classList.toggle("show");
 })
 
 
-
-
 // fonction qui recupères la liste des ingredient, ustensile ou appareils
 
 // affiches la liste des Appareils
@@ -42,7 +40,6 @@ dropAppareil.innerHTML=liAppareil;
 }
 afficherLiAppareil()
 
-
 // afficher la liste des ustensiles
 function afficherLiUstensil(){
   let tableauUstens=[]
@@ -54,7 +51,7 @@ for (let valeur of ustensil){
 }
 let tableauUstensils= [...new Set(tableauUstens.concat(tableauUstens))]
 let liUstensils= tableauUstensils.map(item=>{
-return `<li class='list_utensiles'>${item}</li>`
+return `<li class='list_ustensiles'>${item}</li>`
 
 }).join('')
 dropUstensile.innerHTML=liUstensils;
@@ -69,8 +66,7 @@ const ingredient= recipes.map(item=>item.ingredients);
 console.log(ingredient)
 for (let valeur of ingredient){
   for (let j=0; j<valeur.length; j++){
-    console.log(valeur[j]["ingredient"])
- tableauIngred.push(valeur[j]["ingredient"])
+   tableauIngred.push(valeur[j]["ingredient"])
 }
 }
 let tableauIngredients=[...new Set(tableauIngred.concat(tableauIngred))]
@@ -82,28 +78,59 @@ dropIngredient.innerHTML=liIngredient;
 afficherIngredient()
 
 
+// afficher les ingredients, ustensiles et appareil == correspond à la saisie input
+const listIngredient= document.querySelectorAll('.list_ingredients');
+const listUtensiles= document.querySelectorAll('.list_ustensiles');
+const listAppareils= document.querySelectorAll('.list_appareils');
+
+// trie les listes en fonction de l'input
+function afficherListTrier(liste,search){
+  for(let valeur of liste){
+       let textValue=valeur.textContent || valeur.innerText
+      if (textValue.toLowerCase().indexOf(search)> -1){
+       valeur.style.display='';
+     }
+      else{
+        valeur.style.display='none'
+      }}
+  }
   
+// trie les ingredients
+inputIngredient.addEventListener('keyup', function(e){
+  let search =e.target.value.toLowerCase();
+afficherListTrier(listIngredient,search)
+})
 
+//trie les ustensiles
+inputUstensile.addEventListener('keyup', function(e){
+  let search =e.target.value.toLowerCase();
+afficherListTrier(listUtensiles,search)
+})
 
-  // function filterFunction() {
-  //   let filter, ul, li, a, i;
-  //   filter = inputTags.value.toUpperCase();
-  //   console.log(filter)
-  //   a = myDropdown.getElementsByTagName("a");
-  //   for (i = 0; i < a.length; i++) {
-  //    txtValue = a[i].textContent || a[i].innerText;
-  //     if (txtValue.toUpperCase().indexOf(filter) > -1) {
-  //       a[i].style.display = "";
-  //     } else {
-  //       a[i].style.display = "none";
-  //     }
-  //   }
-  // }
+//trie les appareils
+inputAppareil.addEventListener('keyup', function(e){
+  let search =e.target.value.toLowerCase();
+afficherListTrier(listAppareils,search)
+})
 
+// affiches les tags lorque qu'on cliques sur un élements
 
-  // inputTags.addEventListener('click', ()=>{
-  //   filterFunction();
-  // })
+function afficherTags(){
+
+  for (let value of listAppareils){
+  value.addEventListener('click', ()=>{
+  let txtValue=value.textContent || value.innerText;
+  return` <div class='tags_li'>
+  <span class='essai'>${textValue}</span>
+  <i class="bi bi-x-circle"></i>
+ </div>`
+  })
+
+ }
+
+}
+
+afficherTags()
  
 
 

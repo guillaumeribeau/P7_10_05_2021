@@ -186,3 +186,19 @@ li{
         color:black;
     }
 }
+
+
+
+// stylisation des tags
+
+.tags_li{
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  width: 150px;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+ background-color: #68D9A4;
+}
+

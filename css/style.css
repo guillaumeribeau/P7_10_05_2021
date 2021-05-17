@@ -172,6 +172,17 @@ li:hover {
   color: black;
 }
 
+.tags_li {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  width: 150px;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #68D9A4;
+}
+
 .icone {
   position: absolute;
   font-size: 32px;
