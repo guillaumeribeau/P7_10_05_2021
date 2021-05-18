@@ -149,7 +149,7 @@ grid-template-columns: repeat(6,3fr);
 
    // chevron
 
-   .bi-chevron-down{
+   .fa-chevron-down{
        position:absolute;
        right: 30px;
        top:25px;
@@ -159,16 +159,16 @@ grid-template-columns: repeat(6,3fr);
 
    }
   
-   .bi-chevron-up{
-       display: block;
-    position:absolute;
-    right: 5px;
-    top:15px;
-    font-size:20px;
-    color: black;
-    cursor: pointer;
-    z-index: 100;
-}
+//    .bi-chevron-up{
+//        display: block;
+//     position:absolute;
+//     right: 5px;
+//     top:15px;
+//     font-size:20px;
+//     color: black;
+//     cursor: pointer;
+//     z-index: 100;
+// }
 
 
 .list{

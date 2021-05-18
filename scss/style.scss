@@ -1,7 +1,7 @@
-@import "variable_overrides.scss";
+
 @import "dropdown.scss";
 @import "card.scss";
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
+//@import "../node_modules/bootstrap/scss/bootstrap.scss";
 
 * {
     box-sizing: border-box;
@@ -42,3 +42,7 @@ border: none;
 
 }
 
+.icone{
+    position: absolute;
+    right:4%;
+}

@@ -117,7 +117,7 @@ afficherListTrier(listAppareils,search)
 
 
 // affiches les tags lorque qu'on cliques sur un élements
-const tags= document.querySelector('.tags')
+let tags= document.querySelector('.tags')
 
 function afficherTags(liste){
   
@@ -136,11 +136,10 @@ return (item.appliance.toLowerCase().includes(txtValue)
 })
 
 AfficherRecettes(filtreTags);
-
- // permet de creer le tags
+// permet de creer le tags
  tags.innerHTML+=` <div class='tags_li'>
   <span class='tags_value'>${txtValue}</span>
-  <i id='top'class="bi bi-x-circle"></i>
+  <span class='croix'><i class="far fa-times-circle"></i></span>
  </div>`
 })
 
@@ -152,9 +151,8 @@ afficherTags(listUtensiles);
 afficherTags(listIngredient);
  
 // Enlever les tags au click sur la croix
- 
 function enleverTags(){
-const croixTags= document.querySelectorAll('.bi-x-circle')
+const croixTags= document.querySelectorAll('.croix')
 console.log(croixTags)
 
 for (let value of croixTags){
