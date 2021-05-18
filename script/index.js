@@ -7,7 +7,7 @@ console.log(recipes[0].ingredients)
 
 /**@param{tableau} */
 // fonction qui permet de creer les card des recettes
-function AfficherRecettes (recette){
+export function AfficherRecettes (recette){
     
     const recetteCard = recette.map(recipe=>{
   
@@ -42,17 +42,18 @@ main.innerHTML=recetteCard;
 AfficherRecettes(recipes)
 
 
+
 // fonction du filtre principale
 const inputP = document.getElementById('search');
 inputP.addEventListener('keyup', (e)=>{
 let search = e.target.value.toLowerCase();
 if (search.length>2){
-console.log(search)
 const filtrerCard= recipes.filter((item=>{
-return (
-item.name.toLowerCase().includes(search) || item.ingredients.toString().toLowerCase().includes(search)
+  const ingredient= item.ingredients.map(x=>x["ingredient"]);
+  return (
+item.name.toLowerCase().includes(search) || item.appliance.toString().toLowerCase().includes(search)
  || item.description.includes(search)
- || item.ingredients.map(x=> x.ingredients).includes(search)
+ || ingredient.toString().toLowerCase().includes(search)
 )
 
 }))

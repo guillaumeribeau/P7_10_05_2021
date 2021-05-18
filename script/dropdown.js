@@ -1,4 +1,5 @@
 import {recipes} from './recipes.js'
+import{AfficherRecettes} from './index.js'
 
 const dropIngredient=  document.getElementById("drop_ingredients");
 const dropAppareil=  document.getElementById("drop_appareils");
@@ -113,6 +114,8 @@ inputAppareil.addEventListener('keyup', function(e){
 afficherListTrier(listAppareils,search)
 })
 
+
+
 // affiches les tags lorque qu'on cliques sur un élements
 const tags= document.querySelector('.tags')
 
@@ -120,17 +123,30 @@ function afficherTags(liste){
   
 for (let value of liste){
 
-  value.addEventListener('click', ()=>{
-let txtValue=value.textContent || value.innerText;
+value.addEventListener('click', ()=>{
+let txtValue=value.textContent.toLowerCase() || value.innerText;
    
+const filtreTags= recipes.filter(item=>{
+const ingredient= item.ingredients.map(x=>x["ingredient"]);
+
+return (item.appliance.toLowerCase().includes(txtValue)
+  || ingredient.toString().toLowerCase().includes(txtValue)
+  ||item.ustensils.toString().toLowerCase().includes(txtValue)
+  )
+})
+
+AfficherRecettes(filtreTags);
+
+ // permet de creer le tags
  tags.innerHTML+=` <div class='tags_li'>
   <span class='tags_value'>${txtValue}</span>
-  <i class="bi bi-x-circle"></i>
+  <i id='top'class="bi bi-x-circle"></i>
  </div>`
 })
 
 }
 }
+
 afficherTags(listAppareils);
 afficherTags(listUtensiles);
 afficherTags(listIngredient);
@@ -153,4 +169,7 @@ tagsList.style.display='none'
 
 }
 enleverTags()
+
+
+
 
