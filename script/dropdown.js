@@ -44,20 +44,22 @@ dropUstensile.classList.toggle("show");
 // fonction qui recupères la liste des ingredient, ustensile ou appareils
 
 // affiches la liste des Appareils
-function afficherLiAppareil(){
+export const afficherLiAppareil=function(){
 const appareil = recipes.map(item=>item.appliance);
 let tableauAppareil = [...new Set(appareil.concat(appareil))] // retires les doublons
-console.log(tableauAppareil)
 let liAppareil=tableauAppareil.map(item=>{
   return `
  <li class='list_appareils'>${item}</li>`
 }).join('')
-dropAppareil.innerHTML=liAppareil;
+return liAppareil
 }
-afficherLiAppareil()
+dropAppareil.innerHTML=afficherLiAppareil()
+//afficherLiAppareil()
+
+
 
 // afficher la liste des ustensiles
-function afficherLiUstensil(){
+export function afficherLiUstensil(){
   let tableauUstens=[]
 const ustensil = recipes.map(item=>item.ustensils);
 for (let valeur of ustensil){
@@ -70,16 +72,16 @@ let liUstensils= tableauUstensils.map(item=>{
 return `<li class='list_ustensiles'>${item}</li>`
 
 }).join('')
-dropUstensile.innerHTML=liUstensils;
- 
+return liUstensils;
 }
-afficherLiUstensil()
+
+dropUstensile.innerHTML=afficherLiUstensil()
+
 
 // afficher les ingredients dans la liste
-function afficherIngredient(){
+export function afficherIngredient(){
 let tableauIngred=[];
 const ingredient= recipes.map(item=>item.ingredients);
-console.log(ingredient)
 for (let valeur of ingredient){
   for (let j=0; j<valeur.length; j++){
    tableauIngred.push(valeur[j]["ingredient"])
@@ -89,9 +91,9 @@ let tableauIngredients=[...new Set(tableauIngred.concat(tableauIngred))]
 let liIngredient= tableauIngredients.map(item=>{
 return`<li class='list_ingredients'>${item}</li>`
 }).join('')
-dropIngredient.innerHTML=liIngredient;
+return liIngredient;
 }
-afficherIngredient()
+dropIngredient.innerHTML=afficherIngredient()
 
 
 // afficher les ingredients, ustensiles et appareil == correspond à la saisie input
@@ -100,7 +102,7 @@ const listUtensiles= document.querySelectorAll('.list_ustensiles');
 const listAppareils= document.querySelectorAll('.list_appareils');
 
 // fonction les tags en fonction de l'input
-function afficherListTrier(liste,search){
+export function afficherListTrier(liste,search){
   for(let valeur of liste){
        let textValue=valeur.textContent || valeur.innerText
       if (textValue.toLowerCase().indexOf(search)> -1){
@@ -131,16 +133,12 @@ afficherListTrier(listAppareils,search)
 
 
 
+
 // affiches les tags lorque qu'on cliques sur un élements
-let tags= document.querySelector('.tags')
-
 function afficherTags(liste){
-  
 for (let value of liste){
-
 value.addEventListener('click', ()=>{
 let txtValue=value.textContent.toLowerCase() || value.innerText;
-   
 const filtreTags= recipes.filter(item=>{
 const ingredient= item.ingredients.map(x=>x["ingredient"]);
 
@@ -150,40 +148,26 @@ return (item.appliance.toLowerCase().includes(txtValue)
   )
 })
 
+//affiche les recettes filtrer
 AfficherRecettes(filtreTags);
 // permet de creer le tags
+ let tags= document.querySelector('.tags')
  tags.innerHTML+=` <div class='tags_li'>
   <span class='tags_value'>${txtValue}</span>
   <span class='croix'><i class="far fa-times-circle"></i></span>
  </div>`
-})
-
+ const croixTags= document.querySelectorAll('.fa-times-circle')
+ for (let value of croixTags){
+ value.addEventListener('click',(e)=>{
+   console.log(value)
+ const tagsList= value.closest('div')
+ tagsList.style.background='transparent'
+ tagsList.innerHTML=''
+  })}
+ })}
 }
-}
-
 afficherTags(listAppareils);
 afficherTags(listUtensiles);
 afficherTags(listIngredient);
  
-// Enlever les tags au click sur la croix
-function enleverTags(){
-
-const croixTags= document.querySelectorAll('.croix')
-console.log(croixTags)
-
-for (let value of croixTags){
-  console.log(value)
-  value.addEventListener('click',()=>{
-const tagsList= document.querySelector('.tags_li')
-console.log(tagsList)
-tagsList.style.display='none'
-})
-
-}
-
-}
-enleverTags()
-
-
-
 

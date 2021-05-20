@@ -1,8 +1,10 @@
 
 
 import {recipes} from './recipes.js'
-console.log(recipes) // object
-console.log(recipes[0].ingredients)
+import {afficherLiAppareil,afficherListTrier,afficherLiUstensil,afficherIngredient} from './dropdown.js'
+
+// console.log(recipes) // object
+// console.log(recipes[0].ingredients)
 const recherchePrincipale = document.getElementById('search')
 
 
@@ -45,7 +47,7 @@ AfficherRecettes(recipes)
 // permet de filter le tableau avec methode Filter()
 function filtrerTabeauCard(e){
   let search = e.target.value.toLowerCase();
-  
+  if (search.length>2){
 const filtrerCard= recipes.filter((item=>{
   const ingredient= item.ingredients.map(x=>x["ingredient"]);
    return (
@@ -54,7 +56,7 @@ const filtrerCard= recipes.filter((item=>{
    || ingredient.toString().toLowerCase().includes(search)
    )
   }))
-  AfficherRecettes(filtrerCard)
+AfficherRecettes(filtrerCard)
 // si aucune occurence alors on affiche toutes les recettes
 if (filtrerCard.length===0){
 recherchePrincipale.value='';
@@ -62,14 +64,39 @@ recherchePrincipale.setAttribute('placeholder', 'Aucune recette ne correspond à
 AfficherRecettes(recipes)
 }
 }
+}
 
 // Au keyup on execute la fonction filtrer card
 const inputP = document.getElementById('search');
 inputP.addEventListener('keyup', filtrerTabeauCard)
 
+// Au keyUp on filtres la liste de tags
+inputP.addEventListener('keyup',filtrerListeTags)
 
-
-
-
-
+// permet d'afficher seulement les elements des listes ingredients, ustensiles, appareil si elle
+//correspond à la saisie dans le champ principale.
+function filtrerListeTags(e){
+let search = e.target.value.toLowerCase();
+const listAppareil= document.querySelectorAll('.list_appareils')
+const listIngredient= document.querySelectorAll('.list_ingredients')
+const listUstensile= document.querySelectorAll('.list_ustensiles')
+for (let value of listAppareil){
+ const valeurAppareil= value.innerHTML.toLowerCase();
+ if (valeurAppareil.includes(search)){
+ afficherListTrier(listAppareil,search)
+ }
+}
+for (let value of listIngredient){
+  const valeurIngredient= value.innerHTML.toLowerCase();
+  if (valeurIngredient.includes(search)){
+    afficherListTrier(listIngredient,search)
+  }
+}
+for (let value of listUstensile){
+  const valeurUstensil= value.innerHTML.toLowerCase();
+  if (valeurUstensil.includes(search)){
+    afficherListTrier(listUstensile,search)
+  }
+}
+}
 
