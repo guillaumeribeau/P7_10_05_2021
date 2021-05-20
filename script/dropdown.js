@@ -13,18 +13,33 @@ const inputIngredient= document.getElementById('input_ingredients');
 const inputAppareil= document.getElementById('input_appareils');
 const inputUstensile= document.getElementById('input_ustensiles');
 
+// deroule les dropdown au click
 chevronIngredient.addEventListener('click',()=>{
 dropIngredient.classList.toggle("show");
+inputIngredient.setAttribute('placeholder',' recherche par Ingrédient');
 })
 
 chevronAppareil.addEventListener('click',()=>{
 dropAppareil.classList.toggle("show");
+inputAppareil.setAttribute('placeholder',' recherche par Appareils');
 })
 
 chevronUstensile.addEventListener('click',()=>{
 dropUstensile.classList.toggle("show");
+inputUstensile.setAttribute('placeholder',' recherche par Ustensiles');
+})
+// déroule les dropdown au keyup sur input tags
+inputIngredient.addEventListener('keyup',()=>{
+dropIngredient.classList.toggle("show");
 })
 
+inputAppareil.addEventListener('keyup',()=>{
+  dropAppareil.classList.toggle("show");
+  })
+  
+inputUstensile.addEventListener('keyup',()=>{
+dropUstensile.classList.toggle("show");
+})
 
 // fonction qui recupères la liste des ingredient, ustensile ou appareils
 
@@ -84,7 +99,7 @@ const listIngredient= document.querySelectorAll('.list_ingredients');
 const listUtensiles= document.querySelectorAll('.list_ustensiles');
 const listAppareils= document.querySelectorAll('.list_appareils');
 
-// trie les listes en fonction de l'input
+// fonction les tags en fonction de l'input
 function afficherListTrier(liste,search){
   for(let valeur of liste){
        let textValue=valeur.textContent || valeur.innerText
@@ -152,6 +167,7 @@ afficherTags(listIngredient);
  
 // Enlever les tags au click sur la croix
 function enleverTags(){
+
 const croixTags= document.querySelectorAll('.croix')
 console.log(croixTags)
 
