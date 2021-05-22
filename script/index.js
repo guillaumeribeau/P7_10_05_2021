@@ -3,6 +3,7 @@
 import {recipes} from './recipes.js'
 import {afficherLiAppareil,afficherListTrier,afficherLiUstensil,afficherIngredient} from './dropdown.js'
 
+
 // console.log(recipes) // object
 // console.log(recipes[0].ingredients)
 const recherchePrincipale = document.getElementById('search')
@@ -64,39 +65,85 @@ recherchePrincipale.setAttribute('placeholder', 'Aucune recette ne correspond à
 AfficherRecettes(recipes)
 }
 }
+else{
+AfficherRecettes(recipes)
 }
+}
+
+// fonction qui retourne le tableau filtrer recherche principale.
+const filtrerTableauCardTrier =function(search){
+const filtrerCard= recipes.filter((item=>{
+ const ingredient= item.ingredients.map(x=>x["ingredient"]);
+   return (
+    item.name.toLowerCase().includes(search) || item.appliance.toString().toLowerCase().includes(search)
+    || item.description.includes(search)
+   || ingredient.toString().toLowerCase().includes(search)
+   )
+  }))
+  
+  return filtrerCard
+}
+
+
 
 // Au keyup on execute la fonction filtrer card
 const inputP = document.getElementById('search');
 inputP.addEventListener('keyup', filtrerTabeauCard)
 
-// Au keyUp on filtres la liste de tags
-inputP.addEventListener('keyup',filtrerListeTags)
 
-// permet d'afficher seulement les elements des listes ingredients, ustensiles, appareil si elle
-//correspond à la saisie dans le champ principale.
-function filtrerListeTags(e){
-let search = e.target.value.toLowerCase();
-const listAppareil= document.querySelectorAll('.list_appareils')
-const listIngredient= document.querySelectorAll('.list_ingredients')
-const listUstensile= document.querySelectorAll('.list_ustensiles')
-for (let value of listAppareil){
- const valeurAppareil= value.innerHTML.toLowerCase();
- if (valeurAppareil.includes(search)){
- afficherListTrier(listAppareil,search)
- }
-}
-for (let value of listIngredient){
-  const valeurIngredient= value.innerHTML.toLowerCase();
-  if (valeurIngredient.includes(search)){
-    afficherListTrier(listIngredient,search)
+// permet d'afficher seulement les elements de la liste encore présent dans le tableau filtrer 
+// par la recherche principale.
+const listAppareils= document.querySelectorAll('.list_appareils')
+const listIngredients= document.querySelectorAll('.list_ingredients')
+const listUstensiles= document.querySelectorAll('.list_ustensiles')
+
+// retournes le tableau trier recherche principale
+inputP.addEventListener('keyup', function(e){
+ let search = e.target.value.toLowerCase();
+const cardRestante=filtrerTableauCardTrier(search)
+const appareilRestant= cardRestante.map(item=>item.appliance.toLowerCase())
+const ingredientRestant= cardRestante.map(item=>{
+  const ingredient= item.ingredients.map(x=>x["ingredient"]);
+   return ingredient
+})
+console.log(ingredientRestant)
+if (search.length>2){
+  
+ for (let valeur of listAppareils){
+  let textValue=valeur.textContent.toLowerCase() || valeur.innerText.toLowerCase() 
+   
+   if (appareilRestant.includes(textValue)){
+
+    valeur.style.display='';
   }
-}
-for (let value of listUstensile){
-  const valeurUstensil= value.innerHTML.toLowerCase();
-  if (valeurUstensil.includes(search)){
-    afficherListTrier(listUstensile,search)
+  else{
+     valeur.style.display='none'
+   }
   }
+  for (let valeur of listIngredients){
+    let textValue=valeur.textContent.toLowerCase() || valeur.innerText.toLowerCase() 
+   console.log(textValue)
+     if (ingredientRestant.includes(textValue)){
+  
+      valeur.style.display='';
+    }
+    else{
+       valeur.style.display='none'
+     }
+    }
+  
 }
+
+else{
+    // afficherListTrier(listIngredients,search)
+  afficherListTrier(listUstensiles,search)
+  afficherListTrier(listAppareils,search)
 }
+ 
+})
+
+
+
+  
+
 

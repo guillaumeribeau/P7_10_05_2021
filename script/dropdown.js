@@ -95,16 +95,15 @@ return liIngredient;
 }
 dropIngredient.innerHTML=afficherIngredient()
 
-
 // afficher les ingredients, ustensiles et appareil == correspond à la saisie input
-const listIngredient= document.querySelectorAll('.list_ingredients');
-const listUtensiles= document.querySelectorAll('.list_ustensiles');
+const listIngredients= document.querySelectorAll('.list_ingredients');
+const listUstensiles= document.querySelectorAll('.list_ustensiles');
 const listAppareils= document.querySelectorAll('.list_appareils');
 
-// fonction les tags en fonction de l'input
+// trie la liste des tags en fonction de l'inut tags
 export function afficherListTrier(liste,search){
   for(let valeur of liste){
-       let textValue=valeur.textContent || valeur.innerText
+       let textValue=valeur.textContent || valeur.innerText 
       if (textValue.toLowerCase().indexOf(search)> -1){
        valeur.style.display='';
      }
@@ -116,13 +115,13 @@ export function afficherListTrier(liste,search){
 // trie les ingredients
 inputIngredient.addEventListener('keyup', function(e){
   let search =e.target.value.toLowerCase();
-afficherListTrier(listIngredient,search)
+afficherListTrier(listIngredients,search)
 })
 
 //trie les ustensiles
 inputUstensile.addEventListener('keyup', function(e){
   let search =e.target.value.toLowerCase();
-afficherListTrier(listUtensiles,search)
+afficherListTrier(listUstensiles,search)
 })
 
 //trie les appareils
@@ -130,7 +129,6 @@ inputAppareil.addEventListener('keyup', function(e){
   let search =e.target.value.toLowerCase();
 afficherListTrier(listAppareils,search)
 })
-
 
 
 
@@ -167,7 +165,7 @@ AfficherRecettes(filtreTags);
  })}
 }
 afficherTags(listAppareils);
-afficherTags(listUtensiles);
-afficherTags(listIngredient);
+afficherTags(listUstensiles);
+afficherTags(listIngredients);
  
 
