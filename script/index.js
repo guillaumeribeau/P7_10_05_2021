@@ -3,9 +3,6 @@
 import {recipes} from './recipes.js'
 import {afficherLiAppareil,afficherListTrier,afficherLiUstensil,afficherIngredient} from './dropdown.js'
 
-
-// console.log(recipes) // object
-// console.log(recipes[0].ingredients)
 const recherchePrincipale = document.getElementById('search')
 
 
@@ -104,11 +101,20 @@ const cardRestante=filtrerTableauCardTrier(search)
 const appareilRestant= cardRestante.map(item=>item.appliance.toLowerCase())
 const ingredientRestant= cardRestante.map(item=>{
   const ingredient= item.ingredients.map(x=>x["ingredient"]);
-   return ingredient
+  for (let val of ingredient){
+    const valIngr= val.toLowerCase();
+    return valIngr
+  }
 })
-console.log(ingredientRestant)
+const ustensilRestant = cardRestante.map(item=>{
+ const ustensil= item.ustensils;
+for (let valeur of ustensil){
+  let valUst= valeur.toLowerCase();
+  return valUst
+}})
+
 if (search.length>2){
-  
+  // trie dans les appareils
  for (let valeur of listAppareils){
   let textValue=valeur.textContent.toLowerCase() || valeur.innerText.toLowerCase() 
    
@@ -120,22 +126,30 @@ if (search.length>2){
      valeur.style.display='none'
    }
   }
-  for (let valeur of listIngredients){
+  // trie dans les ingredients
+    for (let valeur of listIngredients){
+  let textValue=valeur.textContent.toLowerCase() || valeur.innerText.toLowerCase() 
+   if (ingredientRestant.includes(textValue)){
+        
+          valeur.style.display='';
+        }
+        else{
+           valeur.style.display='none'
+         }
+  }
+  for (let valeur of listUstensiles){
     let textValue=valeur.textContent.toLowerCase() || valeur.innerText.toLowerCase() 
-   console.log(textValue)
-     if (ingredientRestant.includes(textValue)){
-  
-      valeur.style.display='';
-    }
-    else{
-       valeur.style.display='none'
-     }
-    }
-  
+     if (ustensilRestant.includes(textValue)){
+           valeur.style.display='';
+          }
+          else{
+             valeur.style.display='none'
+           }
+  }    
 }
 
 else{
-    // afficherListTrier(listIngredients,search)
+  afficherListTrier(listIngredients,search)
   afficherListTrier(listUstensiles,search)
   afficherListTrier(listAppareils,search)
 }
