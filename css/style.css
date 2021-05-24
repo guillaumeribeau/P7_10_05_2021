@@ -177,8 +177,32 @@ li:hover {
   background-color: #68D9A4;
 }
 
-.bi-x-circle {
+.fa-times-circle {
   cursor: pointer;
+}
+
+.blue {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  width: 150px;
+  margin-right: 20px;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #3282F7;
+}
+
+.red {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  width: 150px;
+  margin-right: 20px;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #ED6454;
 }
 
 .icone {

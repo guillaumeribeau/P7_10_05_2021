@@ -160,8 +160,7 @@ function afficherTags(liste) {
         value.addEventListener("click", (e) => {
           console.log(value);
           const tagsList = value.closest("div");
-          tagsList.style.background = "transparent";
-          tagsList.innerHTML = "";
+          tagsList.style.display = "none";
         });
       }
     });
@@ -170,3 +169,23 @@ function afficherTags(liste) {
 afficherTags(listAppareils);
 afficherTags(listUstensiles);
 afficherTags(listIngredients);
+
+// function change la couleur du tags
+
+function changeCouleurTag() {
+  for (let value of listIngredients) {
+    value.addEventListener("click", () => {
+      const tagsValue = document.querySelector(".tags_li");
+      tagsValue.classList.remove("tags_li");
+      tagsValue.classList.add("blue");
+    });
+  }
+  for (let value of listUstensiles) {
+    value.addEventListener("click", () => {
+      const tagsValue = document.querySelector(".tags_li");
+      tagsValue.classList.remove("tags_li");
+      tagsValue.classList.add("red");
+    });
+  }
+}
+changeCouleurTag();
