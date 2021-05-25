@@ -16,17 +16,18 @@ const inputUstensile = document.getElementById("input_ustensiles");
 // deroule les dropdown au click
 chevronIngredient.addEventListener("click", () => {
   dropIngredient.classList.toggle("show");
-  inputIngredient.setAttribute("placeholder", " recherche par Ingrédient");
+  inputIngredient.setAttribute("placeholder", " recherche par ingrédient");
+  
 });
 
 chevronAppareil.addEventListener("click", () => {
   dropAppareil.classList.toggle("show");
-  inputAppareil.setAttribute("placeholder", " recherche par Appareils");
+  inputAppareil.setAttribute("placeholder", " recherche par appareils");
 });
 
 chevronUstensile.addEventListener("click", () => {
   dropUstensile.classList.toggle("show");
-  inputUstensile.setAttribute("placeholder", " recherche par Ustensiles");
+  inputUstensile.setAttribute("placeholder", " recherche par ustensiles");
 });
 // déroule les dropdown au keyup sur input tags
 inputIngredient.addEventListener("keyup", () => {
