@@ -47,32 +47,39 @@ export function AfficherRecettes(recette) {
 }
 AfficherRecettes(recipes);
 
-// permet de filter le tableau avec methode Filter()
+// permet de filter le tableau avec methode map
 function filtrerTabeauCard(e) {
+  let tableau=[]
   let search = e.target.value.toLowerCase();
-  if (search.length > 2) {
-    const filtrerCard = recipes.filter((item) => {
-      const ingredient = item.ingredients.map((x) => x["ingredient"]);
-      return (
-        item.name.toLowerCase().includes(search) ||
-        item.appliance.toString().toLowerCase().includes(search) ||
-        item.description.includes(search) ||
-        ingredient.toString().toLowerCase().includes(search)
-      );
-    });
-    AfficherRecettes(filtrerCard);
-    // si aucune occurence alors on affiche toutes les recettes
-    if (filtrerCard.length === 0) {
-      recherchePrincipale.value = "";
-      recherchePrincipale.setAttribute(
-        "placeholder",
-        'Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...'
-      );
-      AfficherRecettes(recipes);
+  const nomRecette = recipes.map((item) => item.name.toLowerCase());
+ 
+  const description = recipes.map((item) => item.description.toLowerCase());
+  const appareil= recipes.map((item) => item.appliance.toLowerCase());
+  const ingredients = recipes.map((item) => {
+  const ingredient = item.ingredients.map((x) => x["ingredient"]);
+    for (let val of ingredient) {
+      const valIngr = val.toLowerCase();
+      return valIngr;
     }
-  } else {
-    AfficherRecettes(recipes);
+  });
+  const ustensiles = recipes.map((item) => {
+    const ustensil = item.ustensils;
+    for (let valeur of ustensil) {
+      let valUst = valeur.toLowerCase();
+      return valUst;
+    }
+  });
+if (search.length>2){
+  for (let value of nomRecette){
+   if (value.includes(search)){
+ tableau.push(value)
+ console.log(tableau)
+ 
   }
+}
+
+
+}
 }
 
 // fonction qui retourne le tableau filtrer recherche principale.
