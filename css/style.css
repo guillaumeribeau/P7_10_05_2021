@@ -174,11 +174,22 @@ li:hover {
   color: white;
   padding: 5px;
   border-radius: 5px;
-  background-color: #68D9A4;
 }
 
 .fa-times-circle {
   cursor: pointer;
+}
+
+.green {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  width: 150px;
+  margin-right: 20px;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #68D9A4;
 }
 
 .blue {

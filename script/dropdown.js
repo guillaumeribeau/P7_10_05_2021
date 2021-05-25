@@ -56,7 +56,6 @@ export const afficherLiAppareil = function () {
   return liAppareil;
 };
 dropAppareil.innerHTML = afficherLiAppareil();
-//afficherLiAppareil()
 
 // afficher la liste des ustensiles
 export function afficherLiUstensil() {
@@ -138,7 +137,7 @@ function afficherTags(liste) {
     value.addEventListener("click", () => {
       let txtValue = value.textContent.toLowerCase() || value.innerText;
       const filtreTags = recipes.filter((item) => {
-        const ingredient = item.ingredients.map((x) => x["ingredient"]);
+        const ingredient = item.ingredients.map((x) => x.ingredient);
 
         return (
           item.appliance.toLowerCase().includes(txtValue) ||
@@ -173,18 +172,22 @@ afficherTags(listIngredients);
 // function change la couleur du tags
 
 function changeCouleurTag() {
+  for (let value of listAppareils) {
+    value.addEventListener("click", () => {
+      const tagsValue = document.querySelector(".tags_li");
+      tagsValue.classList.replace("tags_li", "green");
+    });
+  }
   for (let value of listIngredients) {
     value.addEventListener("click", () => {
       const tagsValue = document.querySelector(".tags_li");
-      tagsValue.classList.remove("tags_li");
-      tagsValue.classList.add("blue");
+      tagsValue.classList.replace("tags_li", "blue");
     });
   }
   for (let value of listUstensiles) {
     value.addEventListener("click", () => {
       const tagsValue = document.querySelector(".tags_li");
-      tagsValue.classList.remove("tags_li");
-      tagsValue.classList.add("red");
+      tagsValue.classList.replace("tags_li", "red");
     });
   }
 }

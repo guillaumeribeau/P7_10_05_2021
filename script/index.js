@@ -47,12 +47,13 @@ export function AfficherRecettes(recette) {
 }
 AfficherRecettes(recipes);
 
+
 // permet de filter le tableau avec methode Filter()
 function filtrerTabeauCard(e) {
   let search = e.target.value.toLowerCase();
   if (search.length > 2) {
     const filtrerCard = recipes.filter((item) => {
-      const ingredient = item.ingredients.map((x) => x["ingredient"]);
+      const ingredient = item.ingredients.map((x) => x.ingredient);
       return (
         item.name.toLowerCase().includes(search) ||
         item.appliance.toString().toLowerCase().includes(search) ||
@@ -78,7 +79,7 @@ function filtrerTabeauCard(e) {
 // fonction qui retourne le tableau filtrer recherche principale.
 const filtrerTableauCardTrier = function (search) {
   const filtrerCard = recipes.filter((item) => {
-    const ingredient = item.ingredients.map((x) => x["ingredient"]);
+    const ingredient = item.ingredients.map((x) => x.ingredient);
     return (
       item.name.toLowerCase().includes(search) ||
       item.appliance.toString().toLowerCase().includes(search) ||
@@ -108,7 +109,7 @@ inputP.addEventListener("keyup", function (e) {
     item.appliance.toLowerCase()
   );
   const ingredientRestant = cardRestante.map((item) => {
-    const ingredient = item.ingredients.map((x) => x["ingredient"]);
+    const ingredient = item.ingredients.map((x) => x.ingredient);
     for (let val of ingredient) {
       const valIngr = val.toLowerCase();
       return valIngr;
