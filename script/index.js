@@ -61,6 +61,7 @@ function filtrerTabeauCard(e) {
         ingredient.toString().toLowerCase().includes(search)
       );
     });
+    
     AfficherRecettes(filtrerCard);
     // si aucune occurence alors on affiche toutes les recettes
     if (filtrerCard.length === 0) {
