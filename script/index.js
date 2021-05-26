@@ -64,7 +64,7 @@ function filtrerTabeauCard(e) {
     AfficherRecettes(filtrerCard);
     // si aucune occurence alors on affiche toutes les recettes
     if (filtrerCard.length === 0) {
-      recherchePrincipale.value = "";
+      recherchePrincipale.value = " ";
       recherchePrincipale.setAttribute(
         "placeholder",
         'Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...'
