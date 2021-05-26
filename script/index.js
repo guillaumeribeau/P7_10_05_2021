@@ -47,71 +47,71 @@ export function AfficherRecettes(recette) {
 }
 AfficherRecettes(recipes);
 
-// // permet de filter le tableau avec methode map
-// function filtrerTabeauCard(e) {
-//   //let tableau = [];
-//   let search = e.target.value.toLowerCase();
-//   const filtrerCard = recipes.map((item) => {
-//     const nomRecette = item.name.toLowerCase();
-//     const description = item.description.toLowerCase();
-//     const appareils = recipes.map((item) => {
-//       const appareil = recipes.map((x) => x.appliance);
-//       return appareil
-//     });
-//     const ingredients = recipes.map((item) => {
-//       const ingredient = item.ingredients.map((x) => x["ingredient"]);
-//       for (let val of ingredient) {
-//         const valIngr = val.toLowerCase();
-//       console.log(valIngr)
-//       if(valIngr.includes(search)){
-//         console.log(valIngr)
-//         return valIngr
-//       }
-//       }
+// permet de filter le tableau avec methode map
+function filtrerTabeauCard(e) {
+  //let tableau = [];
+  let search = e.target.value.toLowerCase();
+  const filtrerCard = recipes.map((item) => {
+    const nomRecette = item.name.toLowerCase();
+    const description = item.description.toLowerCase();
+    const appareils = recipes.map((item) => {
+      const appareil = recipes.map((x) => x.appliance);
+     
+    });
+    const ingredients = recipes.map((item) => {
+      const ingredient = item.ingredients.map((x) => x["ingredient"]);
+      for (let val of ingredient) {
+        const valIngr = val.toLowerCase();
+     // console.log(valIngr)
+      if(valIngr.includes(search)){
+       // console.log(valIngr)
+           
+      }
+      }
   
-//       return ingredient
-//     });
-//     const ustensiles = recipes.map((item) => {
-//       const ustensil = item.ustensils;
-//       console.log(ustensil)
-//     });
+    const ustensiles = recipes.map((item) => {
+      const ustensil = item.ustensils;
+      for (let valeur of ustensil) {
+      let valUst = valeur.toLowerCase();
+   
+    }
+    });
     
-//     for (let valeur of ustensil) {
-//       let valUst = valeur.toLowerCase();
-//       return valUst;
-//     }
+    
 
-//     if (search.length > 2) {
-//       for (let value of nomRecette) {
-//         if (value.includes(search)) {
-//           AfficherRecettes(filtrerCard);
-//           //tableau.push(value);
-//           //console.log(tableau);
-//         }
-//       }
-//     }
-//   });
+    if (search.length > 2) {
+      for (let value of nomRecette) {
+        if (value.includes(search)) {
+          
+          //tableau.push(value);
+          //console.log(tableau);
+        }
+      }
+    }
+  });
+})
+AfficherRecettes(filtrerCard)
+}
+
+// function filtrerTabeauCard(e){
+// let search= e.target.value.toLowerCase()
+//   let filtrerCard = recipes.map((item) => {
+//      let nomRecette = item.name.toLowerCase();
+// console.log(nomRecette)
+
+//  for (let value of nomRecette){
+// if(value.includes(search)){
+//  return filtrerCard
 // }
 
-function filtrerTabeauCard(e){
-let search= e.target.value.toLowerCase()
-  let filtrerCard = recipes.map((item) => {
-     let nomRecette = item.name.toLowerCase();
-console.log(nomRecette)
 
- for (let value of nomRecette){
-if(value.includes(search)){
- return filtrerCard
-}
+//   }
 
 
-  }
+//   });
+//  AfficherRecettes(filtrerCard)
 
-
-  });
- AfficherRecettes(filtrerCard)
-
-}
+// }
 
 
 
