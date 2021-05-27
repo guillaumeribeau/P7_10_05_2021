@@ -11,9 +11,24 @@ const recherchePrincipale = document.getElementById("search");
 /**@param{tableau} */
 // fonction qui permet de creer les card des recettes
 export function AfficherRecettes(recette) {
+  
+  
   const recetteCard = recette
     .map((recipe) => {
-      return `<article class='col-3'>
+let ingredientinfos=''
+const ingredient = recipe.ingredients.map((ingredient) =>{
+console.log(ingredient)
+if (ingredient.quantity) {
+  if (ingredient.unit && ingredient.quantity) {
+    ingredientinfos += `<li><strong>${ingredient.ingredient}</strong>:${ingredient.quantity}${ingredient.unit}</li>`;
+  } else {
+    ingredientinfos += `<li><strong>${ingredient.ingredient}</strong>:${ingredient.quantity}</li>`;
+  }
+} else {
+  ingredientinfos += `<li><strong>${ingredient.ingredient}</strong></li>`;
+}
+});
+ return `<article class='col-3'>
 <div class='img'></div>
 
 <div class='recette__complete'>     
@@ -21,29 +36,23 @@ export function AfficherRecettes(recette) {
 <span class='title__recette'>${recipe.name}</span>
 
 <div>
- <span class='time__logo'><i class="bi bi-clock"></i></span>
+ <span class='time__logo'><i class="far fa-clock"></i></span>
  <span class='time'>${recipe.time}min</span>
 </div>
 </div>
 
  <div class="contenu">
-   <div class='ingredient'>${recipe.ingredients
-     .map(
-       (x) =>
-         `<p><span class="bolder">${x.ingredient}:</span>${x.quantity}${x.unit}</p>`
-     )
-     .join("")}
-  </div>
+   <div class='ingredient'>${ingredientinfos}</div>
  <div class='recettes'>${recipe.description}</div>
 </div>
 
 </div>
 </article>
 `;
-    })
-    .join("");
+    }).join("");
   const main = document.querySelector(".recettes__card");
   main.innerHTML = recetteCard;
+ 
 }
 AfficherRecettes(recipes);
 
