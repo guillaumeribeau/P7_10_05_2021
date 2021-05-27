@@ -8,6 +8,8 @@ import {
 
 const recherchePrincipale = document.getElementById("search");
 
+//---------------------BUILD LES CARDS----------------////////////////
+
 /**@param{tableau} */
 // fonction qui permet de creer les card des recettes
 export function AfficherRecettes(recette) {
@@ -53,7 +55,9 @@ export function AfficherRecettes(recette) {
 }
 AfficherRecettes(recipes);
 
-// permet de filter le tableau avec methode Filter()
+//---------------------------------------------------------------------//
+//---------------------------FILTRE ALGOS n1 avec filter()------------///
+
 function filtrerTabeauCard(e) {
   let search = e.target.value.toLowerCase();
   if (search.length > 2) {
@@ -75,7 +79,7 @@ function filtrerTabeauCard(e) {
         "placeholder",
         'Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...'
       );
-      return ''
+      return "";
     }
   } else {
     AfficherRecettes(recipes);
@@ -83,7 +87,7 @@ function filtrerTabeauCard(e) {
 }
 
 // fonction qui retourne le tableau filtrer recherche principale.
-export const filtrerTableauCardTrier = function (search,array) {
+export const filtrerTableauCardTrier = function (search, array) {
   const filtrerCard = array.filter((item) => {
     const ingredient = item.ingredients.map((x) => x.ingredient);
     return (
@@ -101,6 +105,8 @@ export const filtrerTableauCardTrier = function (search,array) {
 const inputP = document.getElementById("search");
 inputP.addEventListener("keyup", filtrerTabeauCard);
 
+//-------------------TRIER LES ELEMENTS DE LA LISTE--------------------//
+//---------------------------------------------------------------------//
 // permet d'afficher seulement les elements de la liste encore présent dans le tableau filtrer
 // par la recherche principale.
 const listAppareils = document.querySelectorAll(".list_appareils");
@@ -110,7 +116,7 @@ const listUstensiles = document.querySelectorAll(".list_ustensiles");
 // retournes le tableau trier recherche principale
 inputP.addEventListener("keyup", function (e) {
   let search = e.target.value.toLowerCase();
-  const cardRestante = filtrerTableauCardTrier(search,recipes);
+  const cardRestante = filtrerTableauCardTrier(search, recipes);
   const appareilRestant = cardRestante.map((item) =>
     item.appliance.toLowerCase()
   );

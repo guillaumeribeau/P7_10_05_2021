@@ -1,6 +1,9 @@
 import { recipes } from "./recipes.js";
 import { AfficherRecettes, filtrerTableauCardTrier } from "./index.js";
 
+//---------------------------------------------------------//
+//-------------DOM ELEMENTS---------------------------------//
+//-----------------------------------------------------------//
 const dropIngredient = document.getElementById("drop_ingredients");
 const dropAppareil = document.getElementById("drop_appareils");
 const dropUstensile = document.getElementById("drop_ustensiles");
@@ -14,7 +17,9 @@ const inputAppareil = document.getElementById("input_appareils");
 const inputUstensile = document.getElementById("input_ustensiles");
 
 const recherchePrincipale = document.getElementById("search");
-// deroule les dropdown au click
+
+//-----------------------------------------------------------------//
+// -----------deroule les dropdown au click---------------------------//
 chevronIngredient.addEventListener("click", () => {
   dropIngredient.classList.toggle("show");
   inputIngredient.setAttribute("placeholder", " recherche par ingrédient");
@@ -29,7 +34,8 @@ chevronUstensile.addEventListener("click", () => {
   dropUstensile.classList.toggle("show");
   inputUstensile.setAttribute("placeholder", " recherche par ustensiles");
 });
-// déroule les dropdown au keyup sur input tags
+//-------------------------------------------------------------------//
+//----------- déroule les dropdown au keyup sur input tags----------//
 inputIngredient.addEventListener("keyup", () => {
   dropIngredient.classList.toggle("show");
 });
@@ -42,8 +48,9 @@ inputUstensile.addEventListener("keyup", () => {
   dropUstensile.classList.toggle("show");
 });
 
-// fonction qui recupères la liste des ingredient, ustensile ou appareils
-
+//----------------------------------------------------------------------//
+// fonction qui recupères la liste des ingredient, ustensile ou appareils//
+//-------------------------------------------------------------------------//
 // affiches la liste des Appareils
 export const afficherLiAppareil = function () {
   const appareil = recipes.map((item) => item.appliance);
@@ -97,12 +104,14 @@ export function afficherIngredient() {
 }
 dropIngredient.innerHTML = afficherIngredient();
 
+//-------------------------------------------------------------------------------//
 // afficher les ingredients, ustensiles et appareil == correspond à la saisie input
+//-------------------------------------------------------------------------------//
 const listIngredients = document.querySelectorAll(".list_ingredients");
 const listUstensiles = document.querySelectorAll(".list_ustensiles");
 const listAppareils = document.querySelectorAll(".list_appareils");
 
-// trie la liste des tags en fonction de l'inut tags
+// trie la liste des tags en fonction de l'input tags
 export function afficherListTrier(liste, search) {
   for (let valeur of liste) {
     let textValue = valeur.textContent || valeur.innerText;
@@ -132,26 +141,24 @@ inputAppareil.addEventListener("keyup", function (e) {
   afficherListTrier(listAppareils, search);
 });
 
-// affiches les tags lorque qu'on cliques sur un élements
+//------------------FILTRES TAGS-----------------------------------//
+//------------------------------------------------------------------//
 function afficherTags(liste) {
   for (let value of liste) {
     value.addEventListener("click", () => {
       let txtValue = value.textContent.toLowerCase() || value.innerText;
       let rechercheP = recherchePrincipale.value.toLowerCase();
       if (rechercheP.length > 2) {
-        let cardRestante = filtrerTableauCardTrier(rechercheP,recipes);
+        let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
         console.log(cardRestante);
-        
-        let cardRestanteTags=filtrerTableauCardTrier(txtValue,cardRestante)
+
+        let cardRestanteTags = filtrerTableauCardTrier(txtValue, cardRestante);
         //affiche les recettes filtrer apres premier filtre recherche principale
-       console.log(cardRestanteTags)
+        console.log(cardRestanteTags);
         AfficherRecettes(cardRestanteTags);
-      }
-
-      else{
-        let card=filtrerTableauCardTrier(txtValue,recipes);
-        AfficherRecettes(card)
-
+      } else {
+        let card = filtrerTableauCardTrier(txtValue, recipes);
+        AfficherRecettes(card);
       }
     });
   }
@@ -160,76 +167,39 @@ afficherTags(listAppareils);
 afficherTags(listUstensiles);
 afficherTags(listIngredients);
 
+// Je recupères la fonction qui me permet de trier un le tableau (filtrerTableauCardTrier)et je passe en
+//parametre le nouveau tableau
+// si au click j'ai une valeur rentrer dans la recherche principale alors je recuperes son tableau filter
+// et je filtres dessus avec le tags
+// sinon je filtres directement avec le tags
 
-
-
-
-
-// // affiches les tags lorque qu'on cliques sur un élements
-// function afficherTags(liste) {
-//   for (let value of liste) {
-//     value.addEventListener("click", () => {
-//       let txtValue = value.textContent.toLowerCase() || value.innerText;
-//       const filtreTags = recipes.filter((item) => {
-//         const ingredient = item.ingredients.map((x) => x.ingredient);
-
-//         return (
-//           item.appliance.toLowerCase().includes(txtValue) ||
-//           ingredient.toString().toLowerCase().includes(txtValue) ||
-//           item.ustensils.toString().toLowerCase().includes(txtValue)
-//         );
-//       });
-
-//       //affiche les recettes filtrer
-//       AfficherRecettes(filtreTags);
-//       // permet de creer le tags
-//       let tags = document.querySelector(".tags");
-//       tags.innerHTML += ` <div class='tags_li'>
-//   <span class='tags_value'>${txtValue}</span>
-//   <span class='croix'><i class="far fa-times-circle"></i></span>
-//  </div>`;
-//       const croixTags = document.querySelectorAll(".fa-times-circle");
-//       for (let value of croixTags) {
-//         value.addEventListener("click", (e) => {
-//           console.log(value);
-//           const tagsList = value.closest("div");
-//           tagsList.style.display = "none";
-//         });
-//       }
-//     });
-//   }
-// }
-// afficherTags(listAppareils);
-// afficherTags(listUstensiles);
-// afficherTags(listIngredients);
-
-
-
-
-function afficherDiv(liste){
-  for (let value of liste){
-  value.addEventListener("click", ()=>{
-    let txtValue = value.textContent.toLowerCase() || value.innerText;
-    let tags = document.querySelector(".tags");
-    tags.innerHTML += ` <div class='tags_li'>
+//--------------------------------------------------------------------//
+//--------affiches les tags lorque qu'on cliques sur un élements-------//
+function afficherDiv(liste) {
+  for (let value of liste) {
+    value.addEventListener("click", () => {
+      let txtValue = value.textContent.toLowerCase() || value.innerText;
+      let tags = document.querySelector(".tags");
+      tags.innerHTML += ` <div class='tags_li'>
   <span class='tags_value'>${txtValue}</span>
   <span class='croix'><i class="far fa-times-circle"></i></span>
   </div>`;
-    const croixTags = document.querySelectorAll(".fa-times-circle");
-    for (let value of croixTags) {
-      value.addEventListener("click", (e) => {
-        const tagsList = value.closest("div");
-        tagsList.style.display = "none";
+      const croixTags = document.querySelectorAll(".fa-times-circle");
+      for (let value of croixTags) {
+        value.addEventListener("click", (e) => {
+          const tagsList = value.closest("div");
+          tagsList.style.display = "none";
         });
-    }
-  })
+      }
+    });
   }
-  }
-  afficherDiv(listAppareils);
-  afficherDiv(listIngredients)
-  afficherDiv(listUstensiles)
-  
-// function change la couleur du tags
+}
+afficherDiv(listAppareils);
+afficherDiv(listIngredients);
+afficherDiv(listUstensiles);
+
+//-------------------------------------------------------//
+//----fonction change la couleur du tags--------------------//
 
 function changeCouleurTag() {
   for (let value of listAppareils) {
