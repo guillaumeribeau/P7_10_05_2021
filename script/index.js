@@ -8,6 +8,7 @@ import {
 
 const recherchePrincipale = document.getElementById("search");
 
+//--------------BUILD LES CARDS------------//////////////////
 /**@param{tableau} */
 // fonction qui permet de creer les card des recettes
 export function AfficherRecettes(recette) {
@@ -52,9 +53,8 @@ if (ingredient.quantity) {
  
 }
 AfficherRecettes(recipes);
-
-
-// algo de recherche n°2 de la barre de recherche//
+//---------------------------------------------//
+//-----------ALGO n°2 -----------------------//
 function search(e) {
   
   let searchValue= e.target.value.toLowerCase();
@@ -106,6 +106,9 @@ const filtrerTableauCardTrier = function (search) {
   return filtrerCard;
 };
 
+
+//--------------------------------------------------------//
+//-----------------FILTRES LES LISTES--------------------//
 //permet d'afficher seulement les elements de la liste encore présent dans le tableau filtrer
 //par la recherche principale.
 const listAppareils = document.querySelectorAll(".list_appareils");
