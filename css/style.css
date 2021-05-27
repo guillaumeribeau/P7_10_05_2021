@@ -309,4 +309,15 @@ li:hover {
   right: 4%;
 }
 
+@media screen and (max-width: 1000px) {
+  #search {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .icone {
+    right: 9%;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

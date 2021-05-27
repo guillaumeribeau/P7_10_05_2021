@@ -41,8 +41,20 @@ background-color: #E7E7E7;
 border: none;
 
 }
-
 .icone{
     position: absolute;
     right:4%;
+}
+
+
+@media screen and (max-width:1000px){
+    #search{
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+.icone{
+ 
+    right:9%;
+
+}
 }
