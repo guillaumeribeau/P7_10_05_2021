@@ -32,8 +32,11 @@ box-shadow: 5px 3px 7px 2px rgba(0,0,0,0.46);
 width: 380px;
 height:194px;
 overflow: hidden;
+//white-space: nowrap;
+//text-overflow: ellipsis;
 margin-right: 50px;
 margin-bottom: 50px;
+padding-right: 10px;
 background: #E7E7E7;
 border-bottom-left-radius:5px;
 border-bottom-right-radius:5px;
@@ -61,7 +64,7 @@ margin-left: 20px;
 margin-right: 20px;
 }
 
-.bi-clock{
+.fa-clock{
 font-size: 20px;
 margin-right: 5px;
 }
@@ -69,23 +72,36 @@ margin-right: 5px;
 .contenu{
 margin-top: 20px;
 display: flex;
-justify-content: space-between;
-flex-wrap: nowrap;
+//justify-content: space-between;
+//flex-wrap: nowrap;
+overflow: hidden;
 }
 
 .ingredient{
-margin-left: 20px;
-margin-right: 20px;
+ //overflow: hidden;
+ //white-space: nowrap;
+
+
+    li{
+        //white-space: nowrap;
+        //text-overflow: ellipsis;
+//margin-left: 20px;
+//margin-right: 20px;
+margin-bottom: 2px;
 font-family: 'Lato';
 font-size: 10px;
 font-style: normal;
 font-weight: 700;
-line-height: 10px;
+line-height: 8px;
+color:black;
+
+    }
+
 }
 
 .recettes{
-text-overflow: ellipsis;
-margin-right: 20px;
+//text-overflow: ellipsis;
+//margin-right: 20px;
 font-family: 'Roboto';
 font-size: 12px;
 font-style: normal;
