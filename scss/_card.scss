@@ -23,21 +23,31 @@
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
+  &:hover{
+    cursor:pointer;
+  }
 }
 
 .recette__complete {
   width: 380px;
   height: 194px;
   overflow: hidden;
+  display: -moz-box;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
  // white-space: nowrap;
 margin-right: 50px;
   margin-bottom: 50px;
-  padding-right: 10px;
-  padding-bottom: 10px;
+  padding-right: 5px;
+  padding-bottom: 5px;
   background: #e7e7e7;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
+  &:hover{
+    cursor:pointer;
+  }
 }
 
 .infos_principale {
@@ -65,10 +75,15 @@ margin-right: 50px;
   margin-right: 5px;
 }
 
+
+
+
+
+
 .contenu {
 
   display: flex;
-  justify-content: space-between;
+ justify-content: space-between;
   flex-wrap: nowrap;
   //overflow: hidden;
  // white-space: nowrap;
@@ -77,10 +92,14 @@ margin-right: 50px;
 }
 
 .ingredient {
-
+margin-bottom: 10px;
+overflow-wrap: break-word;
+display: flex;
+flex-direction: column;
     li{
-
-margin-left: 20px;
+      display: inline;
+text-overflow: ellipsis;
+margin-left: 10px;
   margin-right: 20px;
   font-family: "Lato";
   font-size: 10px;
@@ -88,6 +107,7 @@ margin-left: 20px;
   font-weight: 700;
   line-height: 10px;
   color: #000000;
+  padding-bottom: 5px;
 
     }
   
@@ -95,8 +115,10 @@ margin-left: 20px;
 
 .recettes {
  
+  overflow-wrap: break-word;
+  margin-top: 15px;
   //margin-right: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-family: "Roboto";
   font-size: 12px;
   font-style: normal;

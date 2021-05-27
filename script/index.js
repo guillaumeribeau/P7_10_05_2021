@@ -39,7 +39,7 @@ export function AfficherRecettes(recette) {
  <span class='time'>${recipe.time}min</span>
 </div>
 </div>
-
+  
  <div class="contenu">
    <div class='ingredient'>${ingredientinfos}</div>
  <div class='recettes'>${recipe.description}</div>
