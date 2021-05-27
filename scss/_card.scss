@@ -77,13 +77,20 @@ margin-right: 50px;
 }
 
 .ingredient {
-  margin-left: 20px;
+
+    li{
+
+margin-left: 20px;
   margin-right: 20px;
   font-family: "Lato";
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
   line-height: 10px;
+  color: #000000;
+
+    }
+  
 }
 
 .recettes {

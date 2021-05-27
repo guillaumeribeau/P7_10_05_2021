@@ -11,24 +11,21 @@ const recherchePrincipale = document.getElementById("search");
 /**@param{tableau} */
 // fonction qui permet de creer les card des recettes
 export function AfficherRecettes(recette) {
-  
-  
   const recetteCard = recette
     .map((recipe) => {
-let ingredientinfos=''
-const ingredient = recipe.ingredients.map((ingredient) =>{
-console.log(ingredient)
-if (ingredient.quantity) {
-  if (ingredient.unit && ingredient.quantity) {
-    ingredientinfos += `<li><strong>${ingredient.ingredient}</strong>:${ingredient.quantity}${ingredient.unit}</li>`;
-  } else {
-    ingredientinfos += `<li><strong>${ingredient.ingredient}</strong>:${ingredient.quantity}</li>`;
-  }
-} else {
-  ingredientinfos += `<li><strong>${ingredient.ingredient}</strong></li>`;
-}
-});
- return `<article class='col-3'>
+      let ingredientinfos = "";
+      const ingredient = recipe.ingredients.map((ingredient) => {
+        if (ingredient.quantity) {
+          if (ingredient.unit && ingredient.quantity) {
+            ingredientinfos += `<li><strong>${ingredient.ingredient}</strong>:${ingredient.quantity}${ingredient.unit}</li>`;
+          } else {
+            ingredientinfos += `<li><strong>${ingredient.ingredient}</strong>:${ingredient.quantity}</li>`;
+          }
+        } else {
+          ingredientinfos += `<li><strong>${ingredient.ingredient}</strong></li>`;
+        }
+      });
+      return `<article class='col-3'>
 <div class='img'></div>
 
 <div class='recette__complete'>     
@@ -49,13 +46,12 @@ if (ingredient.quantity) {
 </div>
 </article>
 `;
-    }).join("");
+    })
+    .join("");
   const main = document.querySelector(".recettes__card");
   main.innerHTML = recetteCard;
- 
 }
 AfficherRecettes(recipes);
-
 
 // permet de filter le tableau avec methode Filter()
 function filtrerTabeauCard(e) {
@@ -70,7 +66,7 @@ function filtrerTabeauCard(e) {
         ingredient.toString().toLowerCase().includes(search)
       );
     });
-    
+
     AfficherRecettes(filtrerCard);
     // si aucune occurence alors on affiche toutes les recettes
     if (filtrerCard.length === 0) {
