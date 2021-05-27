@@ -75,7 +75,7 @@ function filtrerTabeauCard(e) {
         "placeholder",
         'Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...'
       );
-      AfficherRecettes(recipes);
+      return ''
     }
   } else {
     AfficherRecettes(recipes);
@@ -83,8 +83,8 @@ function filtrerTabeauCard(e) {
 }
 
 // fonction qui retourne le tableau filtrer recherche principale.
-const filtrerTableauCardTrier = function (search) {
-  const filtrerCard = recipes.filter((item) => {
+export const filtrerTableauCardTrier = function (search,array) {
+  const filtrerCard = array.filter((item) => {
     const ingredient = item.ingredients.map((x) => x.ingredient);
     return (
       item.name.toLowerCase().includes(search) ||
@@ -110,7 +110,7 @@ const listUstensiles = document.querySelectorAll(".list_ustensiles");
 // retournes le tableau trier recherche principale
 inputP.addEventListener("keyup", function (e) {
   let search = e.target.value.toLowerCase();
-  const cardRestante = filtrerTableauCardTrier(search);
+  const cardRestante = filtrerTableauCardTrier(search,recipes);
   const appareilRestant = cardRestante.map((item) =>
     item.appliance.toLowerCase()
   );

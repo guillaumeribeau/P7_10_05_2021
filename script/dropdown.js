@@ -1,5 +1,5 @@
 import { recipes } from "./recipes.js";
-import { AfficherRecettes } from "./index.js";
+import { AfficherRecettes, filtrerTableauCardTrier } from "./index.js";
 
 const dropIngredient = document.getElementById("drop_ingredients");
 const dropAppareil = document.getElementById("drop_appareils");
@@ -13,11 +13,11 @@ const inputIngredient = document.getElementById("input_ingredients");
 const inputAppareil = document.getElementById("input_appareils");
 const inputUstensile = document.getElementById("input_ustensiles");
 
+const recherchePrincipale = document.getElementById("search");
 // deroule les dropdown au click
 chevronIngredient.addEventListener("click", () => {
   dropIngredient.classList.toggle("show");
   inputIngredient.setAttribute("placeholder", " recherche par ingrédient");
-  
 });
 
 chevronAppareil.addEventListener("click", () => {
@@ -137,31 +137,21 @@ function afficherTags(liste) {
   for (let value of liste) {
     value.addEventListener("click", () => {
       let txtValue = value.textContent.toLowerCase() || value.innerText;
-      const filtreTags = recipes.filter((item) => {
-        const ingredient = item.ingredients.map((x) => x.ingredient);
+      let rechercheP = recherchePrincipale.value.toLowerCase();
+      if (rechercheP.length > 2) {
+        let cardRestante = filtrerTableauCardTrier(rechercheP,recipes);
+        console.log(cardRestante);
+        
+        let cardRestanteTags=filtrerTableauCardTrier(txtValue,cardRestante)
+        //affiche les recettes filtrer apres premier filtre recherche principale
+       console.log(cardRestanteTags)
+        AfficherRecettes(cardRestanteTags);
+      }
 
-        return (
-          item.appliance.toLowerCase().includes(txtValue) ||
-          ingredient.toString().toLowerCase().includes(txtValue) ||
-          item.ustensils.toString().toLowerCase().includes(txtValue)
-        );
-      });
+      else{
+        let card=filtrerTableauCardTrier(txtValue,recipes);
+        AfficherRecettes(card)
 
-      //affiche les recettes filtrer
-      AfficherRecettes(filtreTags);
-      // permet de creer le tags
-      let tags = document.querySelector(".tags");
-      tags.innerHTML += ` <div class='tags_li'>
-  <span class='tags_value'>${txtValue}</span>
-  <span class='croix'><i class="far fa-times-circle"></i></span>
- </div>`;
-      const croixTags = document.querySelectorAll(".fa-times-circle");
-      for (let value of croixTags) {
-        value.addEventListener("click", (e) => {
-          console.log(value);
-          const tagsList = value.closest("div");
-          tagsList.style.display = "none";
-        });
       }
     });
   }
@@ -170,6 +160,75 @@ afficherTags(listAppareils);
 afficherTags(listUstensiles);
 afficherTags(listIngredients);
 
+
+
+
+
+
+// // affiches les tags lorque qu'on cliques sur un élements
+// function afficherTags(liste) {
+//   for (let value of liste) {
+//     value.addEventListener("click", () => {
+//       let txtValue = value.textContent.toLowerCase() || value.innerText;
+//       const filtreTags = recipes.filter((item) => {
+//         const ingredient = item.ingredients.map((x) => x.ingredient);
+
+//         return (
+//           item.appliance.toLowerCase().includes(txtValue) ||
+//           ingredient.toString().toLowerCase().includes(txtValue) ||
+//           item.ustensils.toString().toLowerCase().includes(txtValue)
+//         );
+//       });
+
+//       //affiche les recettes filtrer
+//       AfficherRecettes(filtreTags);
+//       // permet de creer le tags
+//       let tags = document.querySelector(".tags");
+//       tags.innerHTML += ` <div class='tags_li'>
+//   <span class='tags_value'>${txtValue}</span>
+//   <span class='croix'><i class="far fa-times-circle"></i></span>
+//  </div>`;
+//       const croixTags = document.querySelectorAll(".fa-times-circle");
+//       for (let value of croixTags) {
+//         value.addEventListener("click", (e) => {
+//           console.log(value);
+//           const tagsList = value.closest("div");
+//           tagsList.style.display = "none";
+//         });
+//       }
+//     });
+//   }
+// }
+// afficherTags(listAppareils);
+// afficherTags(listUstensiles);
+// afficherTags(listIngredients);
+
+
+
+
+function afficherDiv(liste){
+  for (let value of liste){
+  value.addEventListener("click", ()=>{
+    let txtValue = value.textContent.toLowerCase() || value.innerText;
+    let tags = document.querySelector(".tags");
+    tags.innerHTML += ` <div class='tags_li'>
+  <span class='tags_value'>${txtValue}</span>
+  <span class='croix'><i class="far fa-times-circle"></i></span>
+  </div>`;
+    const croixTags = document.querySelectorAll(".fa-times-circle");
+    for (let value of croixTags) {
+      value.addEventListener("click", (e) => {
+        const tagsList = value.closest("div");
+        tagsList.style.display = "none";
+        });
+    }
+  })
+  }
+  }
+  afficherDiv(listAppareils);
+  afficherDiv(listIngredients)
+  afficherDiv(listUstensiles)
+  
 // function change la couleur du tags
 
 function changeCouleurTag() {
