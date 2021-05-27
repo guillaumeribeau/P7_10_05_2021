@@ -11,13 +11,10 @@ const recherchePrincipale = document.getElementById("search");
 /**@param{tableau} */
 // fonction qui permet de creer les card des recettes
 export function AfficherRecettes(recette) {
-  
-  
-  const recetteCard = recette
+   const recetteCard = recette
     .map((recipe) => {
 let ingredientinfos=''
 const ingredient = recipe.ingredients.map((ingredient) =>{
-console.log(ingredient)
 if (ingredient.quantity) {
   if (ingredient.unit && ingredient.quantity) {
     ingredientinfos += `<li><strong>${ingredient.ingredient}</strong>:${ingredient.quantity}${ingredient.unit}</li>`;
@@ -57,100 +54,41 @@ if (ingredient.quantity) {
 AfficherRecettes(recipes);
 
 
+// algo de recherche n°2 de la barre de recherche//
+function search(e) {
+  
+  let searchValue= e.target.value.toLowerCase();
+  let recipesSorted = [];
+  if (searchValue.length >= 3) {
+    for (let recipe of recipes) {
+      let nameArray = recipe.name.split(" ");
+      let descArray = recipe.description.split(" ");
+      let ingredientsArray = recipe.ingredients.map((ing) => {
+        return ing.ingredient;
+      });
+      if (descArray.some((el) => el.toLowerCase().match(searchValue.toLowerCase()))) {
+        recipesSorted.push(recipe);
+      } else if (nameArray.some((el) => el.toLowerCase().match(searchValue.toLowerCase()))) {
+        recipesSorted.push(recipe);
+      } else if (ingredientsArray.some((el) => el.toLowerCase().match(searchValue.toLowerCase()))) {
+        recipesSorted.push(recipe);
+      }
+     
+    }
 
+   AfficherRecettes(recipesSorted)
+    return recipesSorted;
+  }
 
+ else{
+    AfficherRecettes(recipes)
+  }
 
-
-// function ingredientDetails(recipe) {
-// let ingredientinfos=''
-// const test=recipe.forEach((ingredient) => {
- 
-// if (ingredient.quantity) {
-//   if (ingredient.unit && ingredient.quantity) {
-//     ingredientinfos += `<li><strong>${ingredient.ingredient}</strong> : ${ingredient.quantity} ${ingredient.unit}</li>`;
-//   } else {
-//     ingredientinfos += `<li><strong>${ingredient.ingredient}</strong> : ${ingredient.quantity}</li>`;
-//   }
-// } else {
-//   ingredientinfos += `<li><strong>${ingredient.ingredient}</strong></li>`;
-// }
-// });
-// return AfficherRecettes(recipes, ingredientinfos);
-// }
-
-
-
-
-
-// function search(searchValue) {
-//   // algo de recherche n°1 de la barre de recherche
-//   let recipesSorted = [];
-//   if (searchValue.length >= 3) {
-//     for (let recipe of recipes) {
-//       let nameArray = recipe.name.split(" ");
-//       let descArray = recipe.description.split(" ");
-//       let ingredientsArray = recipe.ingredients.map((ing) => {
-//         return ing.ingredient;
-//       });
-//       if (descArray.some((el) => el.toLowerCase().match(searchValue.toLowerCase()))) {
-//         recipesSorted.push(recipe);
-//       } else if (nameArray.some((el) => el.toLowerCase().match(searchValue.toLowerCase()))) {
-//         recipesSorted.push(recipe);
-//       } else if (ingredientsArray.some((el) => el.toLowerCase().match(searchValue.toLowerCase()))) {
-//         recipesSorted.push(recipe);
-//       }
-//     }
-//   }
-
-//   return recipesSorted;
-// }
-
+}
 
 // Au keyup on execute la fonction filtrer card
 const inputP = document.getElementById("search");
 inputP.addEventListener("keyup", search);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function filtrerTabeauCard(e){
-// let search= e.target.value.toLowerCase()
-//   let filtrerCard = recipes.map((item) => {
-//      let nomRecette = item.name.toLowerCase();
-// console.log(nomRecette)
-
-//  for (let value of nomRecette){
-// if(value.includes(search)){
-//  return filtrerCard
-// }
-
-
-//   }
-
-
-//   });
-//  AfficherRecettes(filtrerCard)
-
-// }
-
-
-
-
-
 
 
 //fonction qui retourne le tableau filtrer recherche principale.
@@ -167,8 +105,6 @@ const filtrerTableauCardTrier = function (search) {
 
   return filtrerCard;
 };
-
-
 
 //permet d'afficher seulement les elements de la liste encore présent dans le tableau filtrer
 //par la recherche principale.
