@@ -152,11 +152,21 @@ function afficherDiv(liste, tableau) {
   for (let value of liste) {
     value.addEventListener("click", () => {
       let txtValue =
-        value.textContent.toLowerCase() || value.innerText.toLowerCase();
-      console.log(tableau);
+      value.textContent.toLowerCase() || value.innerText.toLowerCase();
       tableau.push(txtValue);
+      console.log(tableau)
+      const filtreTagsSeul= recipes.filter((item)=>{
+        const ingredient = item.ingredients.map((x) => x.ingredient);
+      
+        return(
+          item.appliance.toLowerCase().includes(tabsAppareil) && item.ustensils.toString().toLowerCase().includes(tabsUstensiles)
+          && ingredient.toString().toLowerCase().includes(tabsIngredient)
+        )
+      })
+      AfficherRecettes(filtreTagsSeul)
+      console.log(filtreTagsSeul)
 
-      let tags = document.querySelector(".tags");
+ let tags = document.querySelector(".tags");
       tags.innerHTML += ` <div class='tags_li'>
   <span class='tags_value'>${txtValue}</span>
   <span class='croix'><i class="far fa-times-circle"></i></span>
@@ -170,6 +180,7 @@ function afficherDiv(liste, tableau) {
           const indexTags = tableau.indexOf(txtValue); // retires la valeur du tableau au click de la croix
           tableau.splice(indexTags, 1);
           console.log(tableau);
+          AfficherRecettes(filtreTagsSeul)
         });
       }
     });
@@ -208,43 +219,42 @@ afficherDiv(listUstensiles, tabsUstensiles);
 //     }
 //   });
 // };
+  
+// function filtre(tabsUstensiles, tabsAppareil, tabsIngredient) {
 
-function filtre(tabsUstensiles, tabsAppareil, tabsIngredient) {
+//   let rechercheP = recherchePrincipale.value.toLowerCase();
 
-  let rechercheP = recherchePrincipale.value.toLowerCase();
-  console.log(tabsAppareil)
- const filtreTagsSeul= recipes.filter((item)=>{
-   return(
-     item.appliance.toLowerCase().includes(tabsAppareil)
-   )
- })
- console.log(filtreTagsSeul)
+//  const filtreTagsSeul= recipes.filter((item)=>{
+//    return(
+//      item.appliance.toLowerCase().includes(tabsAppareil)
+//    )
+//  })
+//  console.log(filtreTagsSeul)
 
 
-  if (rechercheP.length > 2) {
+//   if (rechercheP.length > 2) {
    
-    let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
-    const filtreTagsAvecRecherche= cardRestante.filter((item)=>{
+//     let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
+//     const filtreTagsAvecRecherche= cardRestante.filter((item)=>{
    
-   return ( 
-     item.appliance.toLowerCase().includes(tabsAppareil)
-   )
+//    return ( 
+//      item.appliance.toLowerCase().includes(tabsAppareil)
+//    )
    
-   })
-   console.log(filtreTagsAvecRecherche)
-  } 
+//    })
+//    console.log(filtreTagsAvecRecherche)
+//   } 
    
-}
-const test= document.querySelectorAll('.active')
-console.log(test)
+// }
 
-function actionneFiltre() {
-  const everyLI = document.querySelectorAll("li");
-  for (let value of everyLI) {
-  value.addEventListener("click", filtre);
-}
-}
-actionneFiltre();
+
+// function actionneFiltre() {
+//   const everyLI = document.querySelectorAll("li");
+//   for (let value of everyLI) {
+//   value.addEventListener("click", filtre);
+// }
+// }
+// actionneFiltre();
 
 //-------------------------------------------------------//
 //----fonction change la couleur du tags--------------------//
@@ -254,7 +264,7 @@ function changeCouleurTag() {
     value.addEventListener("click", () => {
       const tagsValue = document.querySelector(".tags_li");
       tagsValue.classList.replace("tags_li", "green");
-      tagsValue.classList.add('active')
+      
     });
   }
   for (let value of listIngredients) {
