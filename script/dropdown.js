@@ -141,62 +141,110 @@ inputAppareil.addEventListener("keyup", function (e) {
   afficherListTrier(listAppareils, search);
 });
 
-//------------------FILTRES TAGS-----------------------------------//
-//------------------------------------------------------------------//
-function afficherTags(liste) {
-  for (let value of liste) {
-    value.addEventListener("click", () => {
-      let txtValue = value.textContent.toLowerCase() || value.innerText;
-      let rechercheP = recherchePrincipale.value.toLowerCase();
-      if (rechercheP.length > 2) {
-        let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
-        console.log(cardRestante);
-
-        let cardRestanteTags = filtrerTableauCardTrier(txtValue, cardRestante);
-        //affiche les recettes filtrer apres premier filtre recherche principale
-        console.log(cardRestanteTags);
-        AfficherRecettes(cardRestanteTags);
-      } else {
-        let card = filtrerTableauCardTrier(txtValue, recipes);
-        AfficherRecettes(card);
-      }
-    });
-  }
-}
-afficherTags(listAppareils);
-afficherTags(listUstensiles);
-afficherTags(listIngredients);
-
-// Je recupères la fonction qui me permet de trier un le tableau (filtrerTableauCardTrier)et je passe en
-//parametre le nouveau tableau
-// si au click j'ai une valeur rentrer dans la recherche principale alors je recuperes son tableau filter
-// et je filtres dessus avec le tags
-// sinon je filtres directement avec le tags
-
 //--------------------------------------------------------------------//
-//--------affiches les tags lorque qu'on cliques sur un élements-------//
-function afficherDiv(liste) {
+//--------affiches les tags et rempli le tableau correspondant-------//
+
+let tabsAppareil = [];
+let tabsIngredient = [];
+let tabsUstensiles = [];
+
+function afficherDiv(liste, tableau) {
   for (let value of liste) {
     value.addEventListener("click", () => {
-      let txtValue = value.textContent.toLowerCase() || value.innerText;
+      let txtValue =
+        value.textContent.toLowerCase() || value.innerText.toLowerCase();
+      console.log(tableau);
+      tableau.push(txtValue);
+
       let tags = document.querySelector(".tags");
       tags.innerHTML += ` <div class='tags_li'>
   <span class='tags_value'>${txtValue}</span>
   <span class='croix'><i class="far fa-times-circle"></i></span>
   </div>`;
+
       const croixTags = document.querySelectorAll(".fa-times-circle");
       for (let value of croixTags) {
         value.addEventListener("click", (e) => {
           const tagsList = value.closest("div");
           tagsList.style.display = "none";
+          const indexTags = tableau.indexOf(txtValue); // retires la valeur du tableau au click de la croix
+          tableau.splice(indexTags, 1);
+          console.log(tableau);
         });
       }
     });
   }
 }
-afficherDiv(listAppareils);
-afficherDiv(listIngredients);
-afficherDiv(listUstensiles);
+afficherDiv(listAppareils, tabsAppareil);
+afficherDiv(listIngredients, tabsIngredient);
+afficherDiv(listUstensiles, tabsUstensiles);
+
+//------------------------------FILTRES TAGS-----------------------------------//
+//-----------------------------------------------------------------------------//
+
+// recuperes les appareils 
+// const appareilRestant = function (array) {
+//   array.map((item) => item.appliance.toLowerCase());
+// };
+
+
+// // recuperes les ingredients
+// const ingredientRestant = function (array) {
+//   array.map((item) => {
+//     const ingredient = item.ingredients.map((x) => x.ingredient);
+//     for (let val of ingredient) {
+//       const valIngr = val.toLowerCase();
+//       return valIngr;
+//     }
+//   });
+// };
+// // recuperes les ustensils
+// const ustensilRestant = function (array) {
+//   array.map((item) => {
+//     const ustensil = item.ustensils;
+//     for (let valeur of ustensil) {
+//       let valUst = valeur.toLowerCase();
+//       return valUst;
+//     }
+//   });
+// };
+
+function filtre(tabsUstensiles, tabsAppareil, tabsIngredient) {
+
+  let rechercheP = recherchePrincipale.value.toLowerCase();
+  console.log(tabsAppareil)
+ const filtreTagsSeul= recipes.filter((item)=>{
+   return(
+     item.appliance.toLowerCase().includes(tabsAppareil)
+   )
+ })
+ console.log(filtreTagsSeul)
+
+
+  if (rechercheP.length > 2) {
+   
+    let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
+    const filtreTagsAvecRecherche= cardRestante.filter((item)=>{
+   
+   return ( 
+     item.appliance.toLowerCase().includes(tabsAppareil)
+   )
+   
+   })
+   console.log(filtreTagsAvecRecherche)
+  } 
+   
+}
+const test= document.querySelectorAll('.active')
+console.log(test)
+
+function actionneFiltre() {
+  const everyLI = document.querySelectorAll("li");
+  for (let value of everyLI) {
+  value.addEventListener("click", filtre);
+}
+}
+actionneFiltre();
 
 //-------------------------------------------------------//
 //----fonction change la couleur du tags--------------------//
@@ -206,6 +254,7 @@ function changeCouleurTag() {
     value.addEventListener("click", () => {
       const tagsValue = document.querySelector(".tags_li");
       tagsValue.classList.replace("tags_li", "green");
+      tagsValue.classList.add('active')
     });
   }
   for (let value of listIngredients) {
@@ -222,3 +271,29 @@ function changeCouleurTag() {
   }
 }
 changeCouleurTag();
+
+// ancienne fonction du trie de la liste
+
+// function afficherTags(liste) {
+//   for (let value of liste) {
+//     value.addEventListener("click", () => {
+//       let txtValue = value.textContent.toLowerCase() || value.innerText;
+//       let rechercheP = recherchePrincipale.value.toLowerCase();
+//       if (rechercheP.length > 2) {
+//         let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
+//         console.log(cardRestante);
+
+//         let cardRestanteTags = filtrerTableauCardTrier(txtValue, cardRestante);
+//         //affiche les recettes filtrer apres premier filtre recherche principale
+//         console.log(cardRestanteTags);
+//         AfficherRecettes(cardRestanteTags);
+//       } else {
+//         let card = filtrerTableauCardTrier(txtValue, recipes);
+//         AfficherRecettes(card);
+//       }
+//     });
+//   }
+// }
+// afficherTags(listAppareils);
+// afficherTags(listUstensiles);
+// afficherTags(listIngredients);

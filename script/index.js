@@ -63,10 +63,9 @@ function filtrerTabeauCard(e) {
   if (search.length > 2) {
     const filtrerCard = recipes.filter((item) => {
       const ingredient = item.ingredients.map((x) => x.ingredient);
-      return (
+    return (
         item.name.toLowerCase().includes(search) ||
-        item.appliance.toString().toLowerCase().includes(search) ||
-        item.description.includes(search) ||
+        item.description.includes(search) || 
         ingredient.toString().toLowerCase().includes(search)
       );
     });
@@ -90,9 +89,9 @@ function filtrerTabeauCard(e) {
 export const filtrerTableauCardTrier = function (search, array) {
   const filtrerCard = array.filter((item) => {
     const ingredient = item.ingredients.map((x) => x.ingredient);
+   
     return (
       item.name.toLowerCase().includes(search) ||
-      item.appliance.toString().toLowerCase().includes(search) ||
       item.description.includes(search) ||
       ingredient.toString().toLowerCase().includes(search)
     );
