@@ -5,7 +5,7 @@ import {
   afficherLiUstensil,
   afficherIngredient,
 } from "./dropdown.js";
-
+const main = document.querySelector(".recettes__card");
 const recherchePrincipale = document.getElementById("search");
 
 //---------------------BUILD LES CARDS----------------////////////////
@@ -19,12 +19,12 @@ export function AfficherRecettes(recette) {
       const ingredient = recipe.ingredients.map((ingredient) => {
         if (ingredient.quantity) {
           if (ingredient.unit && ingredient.quantity) {
-            ingredientinfos += `<li><strong>${ingredient.ingredient}</strong>:${ingredient.quantity}${ingredient.unit}</li>`;
+            ingredientinfos += `<li>${ingredient.ingredient}:${ingredient.quantity}${ingredient.unit}</li>`;
           } else {
-            ingredientinfos += `<li><strong>${ingredient.ingredient}</strong>:${ingredient.quantity}</li>`;
+            ingredientinfos += `<li>${ingredient.ingredient}:${ingredient.quantity}</li>`;
           }
         } else {
-          ingredientinfos += `<li><strong>${ingredient.ingredient}</strong></li>`;
+          ingredientinfos += `<li>${ingredient.ingredient}</li>`;
         }
       });
       return `<article class='col-3'>
@@ -50,7 +50,7 @@ export function AfficherRecettes(recette) {
 `;
     })
     .join("");
-  const main = document.querySelector(".recettes__card");
+ 
   main.innerHTML = recetteCard;
 }
 AfficherRecettes(recipes);
@@ -74,11 +74,8 @@ function filtrerTabeauCard(e) {
     // si aucune occurence alors on affiche toutes les recettes
     if (filtrerCard.length === 0) {
       recherchePrincipale.value = " ";
-      recherchePrincipale.setAttribute(
-        "placeholder",
-        'Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...'
-      );
-      return "";
+      main.innerHTML+= `<span class='message_erreur'>Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...</span>`
+      
     }
   } else {
     AfficherRecettes(recipes);

@@ -141,7 +141,9 @@ inputAppareil.addEventListener("keyup", function (e) {
   afficherListTrier(listAppareils, search);
 });
 
-//--------------------------------------------------------------------//
+//------------------------------FILTRES TAGS-----------------------------------//
+//-----------------------------------------------------------------------------//
+
 //--------affiches les tags et rempli le tableau correspondant-------//
 
 let tabsAppareil = [];
@@ -149,28 +151,45 @@ let tabsIngredient = [];
 let tabsUstensiles = [];
 
 function afficherDiv(liste, tableau) {
+  let rechercheP = recherchePrincipale.value.toLowerCase(); //recupères la valeur entree Rprincipale
   for (let value of liste) {
     value.addEventListener("click", () => {
       let txtValue =
-      value.textContent.toLowerCase() || value.innerText.toLowerCase();
+        value.textContent.toLowerCase() || value.innerText.toLowerCase()
       tableau.push(txtValue);
-      console.log(tableau)
-      const filtreTagsSeul= recipes.filter((item)=>{
+      console.log(tableau);
+      // si il y a pas de filtres rechercche principale
+      const filtreTagsSeul = recipes.filter((item) => {
         const ingredient = item.ingredients.map((x) => x.ingredient);
-      
-        return(
-          item.appliance.toLowerCase().includes(tabsAppareil) && item.ustensils.toString().toLowerCase().includes(tabsUstensiles)
-          && ingredient.toString().toLowerCase().includes(tabsIngredient)
-        )
-      })
-      AfficherRecettes(filtreTagsSeul)
-      console.log(filtreTagsSeul)
+       
+        return (
+          item.appliance.toLowerCase().includes(tabsAppareil) &&
+          item.ustensils.toString().toLowerCase().includes(tabsUstensiles) &&
+          ingredient.toString().toLowerCase().includes(tabsIngredient)
+        );
+      });
+      AfficherRecettes(filtreTagsSeul);
+      console.log(filtreTagsSeul);
+      // si il y a un filtre de recherche principale
+      if (rechercheP.length > 2) {
+        let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
+        const filtreTagsAvecRecherche = cardRestante.filter((item) => {
+          const ingredient = item.ingredients.map((x) => x.ingredient);
+          
+          return (
+            item.appliance.toLowerCase().includes(tabsAppareil) &&
+            item.ustensils.toString().toLowerCase().includes(tabsUstensiles) &&
+            ingredient.includes(tabsIngredient)
+          );
+        });
+        AfficherRecettes(filtreTagsAvecRecherche);
+      }
 
- let tags = document.querySelector(".tags");
+      let tags = document.querySelector(".tags");
       tags.innerHTML += ` <div class='tags_li'>
-  <span class='tags_value'>${txtValue}</span>
-  <span class='croix'><i class="far fa-times-circle"></i></span>
-  </div>`;
+       <span class='tags_value'>${txtValue}</span>
+       <span class='croix'><i class="far fa-times-circle"></i></span>
+       </div>`;
 
       const croixTags = document.querySelectorAll(".fa-times-circle");
       for (let value of croixTags) {
@@ -180,7 +199,7 @@ function afficherDiv(liste, tableau) {
           const indexTags = tableau.indexOf(txtValue); // retires la valeur du tableau au click de la croix
           tableau.splice(indexTags, 1);
           console.log(tableau);
-          AfficherRecettes(filtreTagsSeul)
+          AfficherRecettes(filtreTagsSeul);
         });
       }
     });
@@ -190,14 +209,10 @@ afficherDiv(listAppareils, tabsAppareil);
 afficherDiv(listIngredients, tabsIngredient);
 afficherDiv(listUstensiles, tabsUstensiles);
 
-//------------------------------FILTRES TAGS-----------------------------------//
-//-----------------------------------------------------------------------------//
-
-// recuperes les appareils 
+// recuperes les appareils
 // const appareilRestant = function (array) {
 //   array.map((item) => item.appliance.toLowerCase());
 // };
-
 
 // // recuperes les ingredients
 // const ingredientRestant = function (array) {
@@ -219,7 +234,7 @@ afficherDiv(listUstensiles, tabsUstensiles);
 //     }
 //   });
 // };
-  
+
 // function filtre(tabsUstensiles, tabsAppareil, tabsIngredient) {
 
 //   let rechercheP = recherchePrincipale.value.toLowerCase();
@@ -231,22 +246,20 @@ afficherDiv(listUstensiles, tabsUstensiles);
 //  })
 //  console.log(filtreTagsSeul)
 
-
 //   if (rechercheP.length > 2) {
-   
+
 //     let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
 //     const filtreTagsAvecRecherche= cardRestante.filter((item)=>{
-   
-//    return ( 
+
+//    return (
 //      item.appliance.toLowerCase().includes(tabsAppareil)
 //    )
-   
+
 //    })
 //    console.log(filtreTagsAvecRecherche)
-//   } 
-   
-// }
+//   }
 
+// }
 
 // function actionneFiltre() {
 //   const everyLI = document.querySelectorAll("li");
@@ -264,7 +277,6 @@ function changeCouleurTag() {
     value.addEventListener("click", () => {
       const tagsValue = document.querySelector(".tags_li");
       tagsValue.classList.replace("tags_li", "green");
-      
     });
   }
   for (let value of listIngredients) {

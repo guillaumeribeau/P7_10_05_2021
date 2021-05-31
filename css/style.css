@@ -262,8 +262,8 @@ li:hover {
 
 .img {
   background: #c7bebe;
-  width: 380px;
-  height: 178px;
+  width: 395px;
+  height: 198px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
@@ -273,8 +273,8 @@ li:hover {
 }
 
 .recette__complete {
-  width: 380px;
-  height: 194px;
+  width: 395px;
+  height: 224px;
   overflow: hidden;
   display: -moz-box;
   display: -webkit-box;
@@ -322,11 +322,10 @@ li:hover {
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .ingredient {
-  margin-bottom: 10px;
   overflow-wrap: break-word;
   display: flex;
   flex-direction: column;
@@ -336,18 +335,18 @@ li:hover {
   text-overflow: ellipsis;
   margin-left: 10px;
   margin-right: 20px;
+  margin-bottom: 0px;
   font-family: "Lato";
   font-size: 10px;
   font-style: normal;
   font-weight: 700;
-  line-height: 10px;
+  line-height: 9px;
   color: #000000;
-  padding-bottom: 5px;
 }
 
 .recettes {
   overflow-wrap: break-word;
-  margin-top: 15px;
+  margin-top: 5px;
   margin-bottom: 10px;
   font-family: "Roboto";
   font-size: 12px;
