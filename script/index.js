@@ -61,15 +61,7 @@ AfficherRecettes(recipes);
 function filtrerTabeauCard(e) {
   let search = e.target.value.toLowerCase();
   if (search.length > 2) {
-    const filtrerCard = recipes.filter((item) => {
-      const ingredient = item.ingredients.map((x) => x.ingredient);
-    return (
-        item.name.toLowerCase().includes(search) ||
-        item.description.includes(search) || 
-        ingredient.toString().toLowerCase().includes(search)
-      );
-    });
-
+    const filtrerCard = filtrerTableauCardTrier(search,recipes)
     AfficherRecettes(filtrerCard);
     // si aucune occurence alors on affiche toutes les recettes
     if (filtrerCard.length === 0) {
@@ -118,7 +110,7 @@ inputP.addEventListener("keyup", function (e) {
   );
   const ingredientRestant = cardRestante.map((item) => {
     const ingredient = item.ingredients.map((x) => x.ingredient);
-    for (let val of ingredient) {
+     for (let val of ingredient) {
       const valIngr = val.toLowerCase();
       return valIngr;
     }
@@ -134,7 +126,7 @@ inputP.addEventListener("keyup", function (e) {
   if (search.length > 2) {
     // trie dans les appareils
     for (let valeur of listAppareils) {
-      let textValue =
+     let textValue =
         valeur.textContent.toLowerCase() || valeur.innerText.toLowerCase();
 
       if (appareilRestant.includes(textValue)) {
