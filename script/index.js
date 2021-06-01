@@ -58,40 +58,40 @@ AfficherRecettes(recipes);
 //---------------------------------------------------------------------//
 //---------------------------FILTRE ALGOS n1 avec filter()------------///
 
-function filtrerTabeauCard(e) {
-  let search = e.target.value.toLowerCase();
-  if (search.length > 2) {
-    const filtrerCard = filtrerTableauCardTrier(search,recipes)
-    AfficherRecettes(filtrerCard);
-    // si aucune occurence alors on affiche toutes les recettes
-    if (filtrerCard.length === 0) {
-      recherchePrincipale.value = " ";
-      main.innerHTML+= `<span class='message_erreur'>Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...</span>`
-      
+function search(e) {
+  
+  let searchValue= e.target.value.toLowerCase();
+  let recipesSorted = [];
+  if (searchValue.length >= 3) {
+    for (let recipe of recipes) {
+      let nameArray = recipe.name.split(" ");
+      let descArray = recipe.description.split(" ");
+      let ingredientsArray = recipe.ingredients.map((ing) => {
+        return ing.ingredient;
+      });
+      if (descArray.some((el) => el.toLowerCase().match(searchValue.toLowerCase()))) {
+        recipesSorted.push(recipe);
+      } else if (nameArray.some((el) => el.toLowerCase().match(searchValue.toLowerCase()))) {
+        recipesSorted.push(recipe);
+      } else if (ingredientsArray.some((el) => el.toLowerCase().match(searchValue.toLowerCase()))) {
+        recipesSorted.push(recipe);
+      }
+     
     }
-  } else {
-    AfficherRecettes(recipes);
+
+   AfficherRecettes(recipesSorted)
+    return recipesSorted;
   }
+
+ else{
+    AfficherRecettes(recipes)
+  }
+
 }
-
-// fonction qui retourne le tableau filtrer recherche principale.
-export const filtrerTableauCardTrier = function (search, array) {
-  const filtrerCard = array.filter((item) => {
-    const ingredient = item.ingredients.map((x) => x.ingredient);
-   
-    return (
-      item.name.toLowerCase().includes(search) ||
-      item.description.includes(search) ||
-      ingredient.toString().toLowerCase().includes(search)
-    );
-  });
-
-  return filtrerCard;
-};
 
 // Au keyup on execute la fonction filtrer card
 const inputP = document.getElementById("search");
-inputP.addEventListener("keyup", filtrerTabeauCard);
+inputP.addEventListener("keyup", search);
 
 //-------------------TRIER LES ELEMENTS DE LA LISTE--------------------//
 //---------------------------------------------------------------------//
