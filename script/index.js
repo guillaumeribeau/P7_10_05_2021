@@ -7,7 +7,7 @@ import {
 } from "./dropdown.js";
 
 const recherchePrincipale = document.getElementById("search");
-
+const main = document.querySelector(".recettes__card");
 //--------------BUILD LES CARDS------------//////////////////
 /**@param{tableau} */
 // fonction qui permet de creer les card des recettes
@@ -48,11 +48,12 @@ if (ingredient.quantity) {
 </article>
 `;
     }).join("");
-  const main = document.querySelector(".recettes__card");
+
   main.innerHTML = recetteCard;
  
 }
 AfficherRecettes(recipes);
+
 //---------------------------------------------//
 //-----------ALGO n°2 -----------------------//
 function search(e) {
@@ -81,7 +82,7 @@ function search(e) {
   }
 
  else{
-    AfficherRecettes(recipes)
+    main.innerHTML =`Aucune recette ne correspond, saisir par exemple poissons, viande, blender...`
   }
 
 }
