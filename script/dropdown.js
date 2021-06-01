@@ -163,6 +163,7 @@ function afficherDiv(liste, tableau) {
         const ingredient = item.ingredients.map((x) => x.ingredient);
        
         return (
+          
           item.appliance.toLowerCase().includes(tabsAppareil) &&
           item.ustensils.toString().toLowerCase().includes(tabsUstensiles) &&
           ingredient.toString().toLowerCase().includes(tabsIngredient)
