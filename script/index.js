@@ -76,13 +76,7 @@ function search(e) {
       }
      
     }
-
-   AfficherRecettes(recipesSorted)
-    return recipesSorted;
-  }
-
- else{
-    main.innerHTML =`Aucune recette ne correspond, saisir par exemple poissons, viande, blender...`
+ return recipesSorted;
   }
 
 }
