@@ -89,6 +89,21 @@ function search(e) {
 
 }
 
+// fonction qui retourne le tableau filtrer recherche principale.
+export const filtrerTableauCardTrier = function (search, array) {
+  const filtrerCard = array.filter((item) => {
+    const ingredient = item.ingredients.map((x) => x.ingredient);
+   
+    return (
+      item.name.toLowerCase().includes(search) ||
+      item.description.includes(search) ||
+      ingredient.toString().toLowerCase().includes(search)
+    );
+  });
+
+  return filtrerCard;
+};
+
 // Au keyup on execute la fonction filtrer card
 const inputP = document.getElementById("search");
 inputP.addEventListener("keyup", search);
