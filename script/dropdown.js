@@ -155,18 +155,21 @@ function afficherDiv(liste, tableau) {
   for (let value of liste) {
     value.addEventListener("click", () => {
       let txtValue =
-        value.textContent.toLowerCase() || value.innerText.toLowerCase()
-      tableau.push(txtValue);
+        value.textContent.toLowerCase() || value.innerText.toLowerCase();
+     tableau.push(txtValue);
       console.log(tableau);
       // si il y a pas de filtres rechercche principale
-      const filtreTagsSeul = recipes.filter((item) => {
-        const ingredient = item.ingredients.map((x) => x.ingredient);
-       
+      const filtreTagsSeul = recipes.filter((recipe) => {
+        let ingredient = recipe.ingredients.map((x) => x.ingredient);
+        let appliance = recipe.appliance;
+        let ustensil = recipe.ustensils;
         return (
-          
-          item.appliance.toLowerCase().includes(tabsAppareil) &&
-          item.ustensils.toString().toLowerCase().includes(tabsUstensiles) &&
-          ingredient.toString().toLowerCase().includes(tabsIngredient)
+         verifieSiValeur(tabsAppareil, appliance) &&
+           verifieSiValeur(tabsIngredient, ingredient) &&
+         verifieSiValeur(tabsUstensiles, ustensil) 
+          //  (verifieSiValeur(tabsAppareil, appliance) &&
+          //    verifieSiValeur(tabsIngredient, ingredient) &&
+          //    verifieSiValeur(tabsUstensiles, ustensil))
         );
       });
       AfficherRecettes(filtreTagsSeul);
@@ -176,7 +179,7 @@ function afficherDiv(liste, tableau) {
         let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
         const filtreTagsAvecRecherche = cardRestante.filter((item) => {
           const ingredient = item.ingredients.map((x) => x.ingredient);
-          
+
           return (
             item.appliance.toLowerCase().includes(tabsAppareil) &&
             item.ustensils.toString().toLowerCase().includes(tabsUstensiles) &&
@@ -209,6 +212,32 @@ function afficherDiv(liste, tableau) {
 afficherDiv(listAppareils, tabsAppareil);
 afficherDiv(listIngredients, tabsIngredient);
 afficherDiv(listUstensiles, tabsUstensiles);
+
+function verifieSiValeur(tableau, liste) {
+ return liste.toString().toLowerCase().includes(tableau)
+  
+}
+    
+
+
+// for (let valApp of tabsAppareil){
+//   return (
+//     recipe.appliance.toLowerCase().includes(valApp)
+//   )
+
+//   }
+//   for (let valUst of tabsUstensiles){
+//     return (
+//       recipe.ustensils.toString().toLowerCase().includes(valUst)
+
+//     )
+//   }
+//     for (let valIng of tabsIngredient){
+//       return (
+//        ingredient.toString().toLowerCase().includes(valIng)
+//   );
+
+//     }
 
 // recuperes les appareils
 // const appareilRestant = function (array) {
