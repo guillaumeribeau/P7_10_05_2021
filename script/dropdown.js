@@ -213,91 +213,14 @@ afficherDiv(listAppareils, tabsAppareil);
 afficherDiv(listIngredients, tabsIngredient);
 afficherDiv(listUstensiles, tabsUstensiles);
 
+// verifie si ingredient/ ustensiles et appareil est présente dans la carte
 function verifieSiValeur(tableau, liste) {
+  
  return liste.toString().toLowerCase().includes(tableau)
   
 }
     
 
-
-// for (let valApp of tabsAppareil){
-//   return (
-//     recipe.appliance.toLowerCase().includes(valApp)
-//   )
-
-//   }
-//   for (let valUst of tabsUstensiles){
-//     return (
-//       recipe.ustensils.toString().toLowerCase().includes(valUst)
-
-//     )
-//   }
-//     for (let valIng of tabsIngredient){
-//       return (
-//        ingredient.toString().toLowerCase().includes(valIng)
-//   );
-
-//     }
-
-// recuperes les appareils
-// const appareilRestant = function (array) {
-//   array.map((item) => item.appliance.toLowerCase());
-// };
-
-// // recuperes les ingredients
-// const ingredientRestant = function (array) {
-//   array.map((item) => {
-//     const ingredient = item.ingredients.map((x) => x.ingredient);
-//     for (let val of ingredient) {
-//       const valIngr = val.toLowerCase();
-//       return valIngr;
-//     }
-//   });
-// };
-// // recuperes les ustensils
-// const ustensilRestant = function (array) {
-//   array.map((item) => {
-//     const ustensil = item.ustensils;
-//     for (let valeur of ustensil) {
-//       let valUst = valeur.toLowerCase();
-//       return valUst;
-//     }
-//   });
-// };
-
-// function filtre(tabsUstensiles, tabsAppareil, tabsIngredient) {
-
-//   let rechercheP = recherchePrincipale.value.toLowerCase();
-
-//  const filtreTagsSeul= recipes.filter((item)=>{
-//    return(
-//      item.appliance.toLowerCase().includes(tabsAppareil)
-//    )
-//  })
-//  console.log(filtreTagsSeul)
-
-//   if (rechercheP.length > 2) {
-
-//     let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
-//     const filtreTagsAvecRecherche= cardRestante.filter((item)=>{
-
-//    return (
-//      item.appliance.toLowerCase().includes(tabsAppareil)
-//    )
-
-//    })
-//    console.log(filtreTagsAvecRecherche)
-//   }
-
-// }
-
-// function actionneFiltre() {
-//   const everyLI = document.querySelectorAll("li");
-//   for (let value of everyLI) {
-//   value.addEventListener("click", filtre);
-// }
-// }
-// actionneFiltre();
 
 //-------------------------------------------------------//
 //----fonction change la couleur du tags--------------------//
@@ -324,28 +247,3 @@ function changeCouleurTag() {
 }
 changeCouleurTag();
 
-// ancienne fonction du trie de la liste
-
-// function afficherTags(liste) {
-//   for (let value of liste) {
-//     value.addEventListener("click", () => {
-//       let txtValue = value.textContent.toLowerCase() || value.innerText;
-//       let rechercheP = recherchePrincipale.value.toLowerCase();
-//       if (rechercheP.length > 2) {
-//         let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
-//         console.log(cardRestante);
-
-//         let cardRestanteTags = filtrerTableauCardTrier(txtValue, cardRestante);
-//         //affiche les recettes filtrer apres premier filtre recherche principale
-//         console.log(cardRestanteTags);
-//         AfficherRecettes(cardRestanteTags);
-//       } else {
-//         let card = filtrerTableauCardTrier(txtValue, recipes);
-//         AfficherRecettes(card);
-//       }
-//     });
-//   }
-// }
-// afficherTags(listAppareils);
-// afficherTags(listUstensiles);
-// afficherTags(listIngredients);
