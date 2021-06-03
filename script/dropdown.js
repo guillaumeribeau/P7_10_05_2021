@@ -162,7 +162,13 @@ function trieParTAgs(liste, tableau) {
     value.addEventListener("click", () => {
       let txtValue =
         value.textContent.toLowerCase() || value.innerText.toLowerCase();
-      tableau.push(txtValue);
+       tableau.push(txtValue);
+       
+       if (tabsAppareil.length>=2){
+         tabsAppareil.shift()
+         console.log(tabsAppareil)
+       }
+       
       console.log(tableau);
       let tagsSeul = algoTags(recipes);
       // algoTags(recipes);
@@ -209,16 +215,11 @@ function verifieSiValeur(tableau, liste) {
   return liste.toString().toLowerCase().includes(tableau);
 }
 
-// function verifieSiValIngredient(tabsIngredient, ingredient) {
-//   const test= function(){return ingredient.toString().toLowerCase().includes(tabsIngredient)};
-//   return tabsIngredient.every(test);
-// }
+function verifieSiValIngredient(tabsIngredient, ingredient) {
+ingredient= ingredient.map(ing=>ing.toLowerCase())
+return tabsIngredient.every(elem=>ingredient.includes(elem.toLowerCase()))}
 
-// function matchTagsIngredients(recipe, ingredients) {
-//    let recipeIngredients = [];
-//   recipe.ingredients.forEach(ingredient => recipeIngredients.push(ingredient.ingredient))
-//    return ingredients.every(ing => recipeIngredients.includes(ing));
-// }
+
 
 //----------------------------------------------------------------------------//
 // -----------------------ALGO pour les TAGS---------------------------------//
