@@ -157,7 +157,7 @@ let tabsUstensiles = [];
 /**@param {Array} tableau rempli le tableau app,ustens ou ingre */
 
 function trieParTAgs(liste, tableau) {
-  let rechercheP = recherchePrincipale.value.toLowerCase(); //recupères la valeur entree Rprincipale
+  let rechercheP = recherchePrincipale.value.toLowerCase(); //recupères la valeur InputP
   for (let value of liste) {
     value.addEventListener("click", () => {
       let txtValue =
@@ -231,6 +231,7 @@ function algoTags(recettes) {
     let ingredient = recipe.ingredients.map((x) => x.ingredient);
     let appliance = recipe.appliance;
     let ustensil = recipe.ustensils;
+    
     return (
       verifieSiValeur(tabsAppareil, appliance) &&
       verifieSiValIngredient(tabsIngredient, ingredient) &&

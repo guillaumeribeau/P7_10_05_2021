@@ -77,7 +77,7 @@ function filtrerTabeauCard(e) {
 }
 
 //---------------------------------------------------------------------//
-//---------------------------FILTRE ALGOS n1 avec filter()------------///
+//---------------------------FILTRE ALGOS n1 avec filter() le plus performant------------///
 
 /**
  * @param {String} search la rechercher taper dans Input principale
