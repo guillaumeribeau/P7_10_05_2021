@@ -20,7 +20,7 @@ const recherchePrincipale = document.getElementById("search");
 
 //-----------------------------------------------------------------//
 // -----------deroule les dropdown au click---------------------------//
-chevronIngredient.addEventListener("click", () => {
+  chevronIngredient.addEventListener("click", () => {
   dropIngredient.classList.toggle("show");
   inputIngredient.setAttribute("placeholder", " recherche par ingrédient");
 });
@@ -54,7 +54,8 @@ inputUstensile.addEventListener("keyup", () => {
 // affiches la liste des Appareils
 export const afficherLiAppareil = function () {
   const appareil = recipes.map((item) => item.appliance);
-  let tableauAppareil = [...new Set(appareil.concat(appareil))]; // retires les doublons
+  // retires les doublons
+  let tableauAppareil = [...new Set(appareil.concat(appareil))]; 
   let liAppareil = tableauAppareil
     .map((item) => {
       return `
@@ -74,7 +75,8 @@ export function afficherLiUstensil() {
       tableauUstens.push(valeur[j]);
     }
   }
-  let tableauUstensils = [...new Set(tableauUstens.concat(tableauUstens))];
+  // retires les doublons
+  let tableauUstensils = [...new Set(tableauUstens.concat(tableauUstens))]; 
   let liUstensils = tableauUstensils
     .map((item) => {
       return `<li class='list_ustensiles'>${item}</li>`;
@@ -94,7 +96,8 @@ export function afficherIngredient() {
       tableauIngred.push(valeur[j]["ingredient"]);
     }
   }
-  let tableauIngredients = [...new Set(tableauIngred.concat(tableauIngred))];
+  // retires les doublons
+  let tableauIngredients = [...new Set(tableauIngred.concat(tableauIngred))]; 
   let liIngredient = tableauIngredients
     .map((item) => {
       return `<li class='list_ingredients'>${item}</li>`;
@@ -105,7 +108,7 @@ export function afficherIngredient() {
 dropIngredient.innerHTML = afficherIngredient();
 
 //-------------------------------------------------------------------------------//
-// afficher les ingredients, ustensiles et appareil == correspond à la saisie input
+// afficher les ingredients, ustensiles et appareil ==> dans input tags
 //-------------------------------------------------------------------------------//
 const listIngredients = document.querySelectorAll(".list_ingredients");
 const listUstensiles = document.querySelectorAll(".list_ustensiles");
@@ -150,43 +153,26 @@ let tabsAppareil = [];
 let tabsIngredient = [];
 let tabsUstensiles = [];
 
-function afficherDiv(liste, tableau) {
+/**@param {string} liste des appareils,ingredients ou ustensile */
+/**@param {Array} tableau rempli le tableau app,ustens ou ingre */
+
+function trieParTAgs(liste, tableau) {
   let rechercheP = recherchePrincipale.value.toLowerCase(); //recupères la valeur entree Rprincipale
   for (let value of liste) {
     value.addEventListener("click", () => {
       let txtValue =
         value.textContent.toLowerCase() || value.innerText.toLowerCase();
-     tableau.push(txtValue);
+      tableau.push(txtValue);
       console.log(tableau);
-      // si il y a pas de filtres rechercche principale
-      const filtreTagsSeul = recipes.filter((recipe) => {
-        let ingredient = recipe.ingredients.map((x) => x.ingredient);
-        let appliance = recipe.appliance;
-        let ustensil = recipe.ustensils;
-        return (
-         verifieSiValeur(tabsAppareil, appliance) &&
-           verifieSiValeur(tabsIngredient, ingredient) &&
-         verifieSiValeur(tabsUstensiles, ustensil) 
-          //  (verifieSiValeur(tabsAppareil, appliance) &&
-          //    verifieSiValeur(tabsIngredient, ingredient) &&
-          //    verifieSiValeur(tabsUstensiles, ustensil))
-        );
-      });
-      AfficherRecettes(filtreTagsSeul);
-      console.log(filtreTagsSeul);
+      let tagsSeul = algoTags(recipes);
+      // algoTags(recipes);
+      AfficherRecettes(tagsSeul);
+
       // si il y a un filtre de recherche principale
       if (rechercheP.length > 2) {
         let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
-        const filtreTagsAvecRecherche = cardRestante.filter((item) => {
-          const ingredient = item.ingredients.map((x) => x.ingredient);
-
-          return (
-            item.appliance.toLowerCase().includes(tabsAppareil) &&
-            item.ustensils.toString().toLowerCase().includes(tabsUstensiles) &&
-            ingredient.includes(tabsIngredient)
-          );
-        });
-        AfficherRecettes(filtreTagsAvecRecherche);
+        const tagsAvecRechercheP = algoTags(cardRestante);
+        AfficherRecettes(tagsAvecRechercheP);
       }
 
       let tags = document.querySelector(".tags");
@@ -202,29 +188,66 @@ function afficherDiv(liste, tableau) {
           tagsList.style.display = "none";
           const indexTags = tableau.indexOf(txtValue); // retires la valeur du tableau au click de la croix
           tableau.splice(indexTags, 1);
-          console.log(tableau);
-          AfficherRecettes(filtreTagsSeul);
+          const EffacerTags = algoTags(recipes);
+          AfficherRecettes(EffacerTags);
         });
       }
     });
   }
 }
-afficherDiv(listAppareils, tabsAppareil);
-afficherDiv(listIngredients, tabsIngredient);
-afficherDiv(listUstensiles, tabsUstensiles);
+trieParTAgs(listAppareils, tabsAppareil);
+trieParTAgs(listIngredients, tabsIngredient);
+trieParTAgs(listUstensiles, tabsUstensiles);
 
-// verifie si ingredient/ ustensiles et appareil est présente dans la carte
+
+/**
+ * @param {tableau} tableau des appareils,ustensile,ingredients rempli aux clics dans la liste
+ * @param {string} liste  des appareils,ustensile present sur les recettes
+*/
+//verifie si dans le tableau on a les ingredients/ appareils/ustensile correspondants
 function verifieSiValeur(tableau, liste) {
-  
- return liste.toString().toLowerCase().includes(tableau)
-  
+  return liste.toString().toLowerCase().includes(tableau);
 }
-    
+
+function verifieSiValIngredient(tabsIngredient, ingredient) {
+  const test= function(){return ingredient.toString().toLowerCase().includes(tabsIngredient)};
+  return tabsIngredient.every(test);
+}
+
+// function matchTagsIngredients(recipe, ingredients) {
+//    let recipeIngredients = [];
+//   recipe.ingredients.forEach(ingredient => recipeIngredients.push(ingredient.ingredient))
+//    return ingredients.every(ing => recipeIngredients.includes(ing));
+// }
+
+//----------------------------------------------------------------------------//
+// -----------------------ALGO pour les TAGS---------------------------------//
+
+/** 
+* @param {object} recettes recettes total ou filtrer apres input principale
+*/
+function algoTags(recettes) {
+  const filtreTags = recettes.filter((recipe) => {
+    let ingredient = recipe.ingredients.map((x) => x.ingredient);
+    let appliance = recipe.appliance;
+    let ustensil = recipe.ustensils;
+    return (
+      verifieSiValeur(tabsAppareil, appliance) &&
+      verifieSiValIngredient(tabsIngredient, ingredient) &&
+      verifieSiValeur(tabsUstensiles, ustensil) 
+
+      // (verifieSiValeur(tabsAppareil, appliance) ||
+      //   verifieSiValeur(tabsIngredient, ingredient) ||
+      //   verifieSiValeur(tabsUstensiles, ustensil))
+    );
+  });
+  return filtreTags;
+}
 
 
-//-------------------------------------------------------//
-//----fonction change la couleur du tags--------------------//
 
+
+//----Change la couleur du tags--------------------//
 function changeCouleurTag() {
   for (let value of listAppareils) {
     value.addEventListener("click", () => {
@@ -246,4 +269,3 @@ function changeCouleurTag() {
   }
 }
 changeCouleurTag();
-
