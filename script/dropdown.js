@@ -164,12 +164,9 @@ function trieParTAgs(liste, tableau) {
         value.textContent.toLowerCase() || value.innerText.toLowerCase();
        tableau.push(txtValue);
        
-       if (tabsAppareil.length>=2){
-         tabsAppareil.shift()
-         console.log(tabsAppareil)
-       }
+      
        
-      console.log(tableau);
+    console.log(tableau)
       let tagsSeul = algoTags(recipes);
       // algoTags(recipes);
       AfficherRecettes(tagsSeul);
@@ -194,6 +191,7 @@ function trieParTAgs(liste, tableau) {
           tagsList.style.display = "none";
           const indexTags = tableau.indexOf(txtValue); // retires la valeur du tableau au click de la croix
           tableau.splice(indexTags, 1);
+          console.log(tableau)
           const EffacerTags = algoTags(recipes);
           AfficherRecettes(EffacerTags);
         });
@@ -211,15 +209,25 @@ trieParTAgs(listUstensiles, tabsUstensiles);
  * @param {string} liste  des appareils,ustensile present sur les recettes
 */
 //verifie si dans le tableau on a les ingredients/ appareils/ustensile correspondants
-function verifieSiValeur(tableau, liste) {
-  return liste.toString().toLowerCase().includes(tableau);
+function matchUstensiles(tabsUstensiles, ustensil) {
+  return ustensil.toString().toLowerCase().includes(tabsUstensiles);
 }
 
-function verifieSiValIngredient(tabsIngredient, ingredient) {
+function matchIngredisents(tabsIngredient, ingredient) {
 ingredient= ingredient.map(ing=>ing.toLowerCase())
 return tabsIngredient.every(elem=>ingredient.includes(elem.toLowerCase()))}
 
+function matchAppareils(tabsAppareil, appliance) {
+   if (tabsAppareil.length===0){
+     return appliance.toString().toLowerCase().includes(tabsAppareil)
+   }
+ 
+   else if (tabsAppareil.length !==0)
+   {let last = tabsAppareil[tabsAppareil.length - 1];
+   return appliance.toString().toLowerCase().includes(last);
+   }
 
+}
 
 //----------------------------------------------------------------------------//
 // -----------------------ALGO pour les TAGS---------------------------------//
@@ -234,13 +242,11 @@ function algoTags(recettes) {
     let ustensil = recipe.ustensils;
     
     return (
-      verifieSiValeur(tabsAppareil, appliance) &&
-      verifieSiValIngredient(tabsIngredient, ingredient) &&
-      verifieSiValeur(tabsUstensiles, ustensil) 
-
-      // (verifieSiValeur(tabsAppareil, appliance) ||
-      //   verifieSiValeur(tabsIngredient, ingredient) ||
-      //   verifieSiValeur(tabsUstensiles, ustensil))
+      
+      matchUstensiles(tabsUstensiles, ustensil) &&
+      matchIngredisents(tabsIngredient, ingredient) &&
+      matchAppareils(tabsAppareil, appliance)
+      
     );
   });
   return filtreTags;
