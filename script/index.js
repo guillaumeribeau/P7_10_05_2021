@@ -78,7 +78,7 @@ function search(e) {
       }
      
     }
-
+   
    AfficherRecettes(recipesSorted)
     return recipesSorted;
   }
