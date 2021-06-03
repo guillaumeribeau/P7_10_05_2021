@@ -209,10 +209,10 @@ function verifieSiValeur(tableau, liste) {
   return liste.toString().toLowerCase().includes(tableau);
 }
 
-function verifieSiValIngredient(tabsIngredient, ingredient) {
-  const test= function(){return ingredient.toString().toLowerCase().includes(tabsIngredient)};
-  return tabsIngredient.every(test);
-}
+// function verifieSiValIngredient(tabsIngredient, ingredient) {
+//   const test= function(){return ingredient.toString().toLowerCase().includes(tabsIngredient)};
+//   return tabsIngredient.every(test);
+// }
 
 // function matchTagsIngredients(recipe, ingredients) {
 //    let recipeIngredients = [];
