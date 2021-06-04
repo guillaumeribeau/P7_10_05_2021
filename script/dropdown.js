@@ -51,11 +51,25 @@ inputUstensile.addEventListener("keyup", () => {
 //----------------------------------------------------------------------//
 // fonction qui recupères la liste des ingredient, ustensile ou appareils//
 //-------------------------------------------------------------------------//
+
+// trier les élments par ordre alpabetique
+function sortAlphabetically (a,b){
+  if(a<b){
+    return -1;
+}
+    else if (a>b){
+   return 1;
+}
+
+else return 0
+
+}
 // affiches la liste des Appareils
 export const afficherLiAppareil = function () {
   const appareil = recipes.map((item) => item.appliance);
   // retires les doublons
   let tableauAppareil = [...new Set(appareil.concat(appareil))]; 
+  tableauAppareil.sort(sortAlphabetically)
   let liAppareil = tableauAppareil
     .map((item) => {
       return `
@@ -77,6 +91,7 @@ export function afficherLiUstensil() {
   }
   // retires les doublons
   let tableauUstensils = [...new Set(tableauUstens.concat(tableauUstens))]; 
+  tableauUstensils.sort(sortAlphabetically)
   let liUstensils = tableauUstensils
     .map((item) => {
       return `<li class='list_ustensiles'>${item}</li>`;
@@ -98,6 +113,7 @@ export function afficherIngredient() {
   }
   // retires les doublons
   let tableauIngredients = [...new Set(tableauIngred.concat(tableauIngred))]; 
+  tableauIngredients.sort(sortAlphabetically)
   let liIngredient = tableauIngredients
     .map((item) => {
       return `<li class='list_ingredients'>${item}</li>`;
@@ -113,6 +129,8 @@ dropIngredient.innerHTML = afficherIngredient();
 const listIngredients = document.querySelectorAll(".list_ingredients");
 const listUstensiles = document.querySelectorAll(".list_ustensiles");
 const listAppareils = document.querySelectorAll(".list_appareils");
+
+  
 
 // trie la liste des tags en fonction de l'input tags
 export function afficherListTrier(liste, search) {
@@ -188,8 +206,10 @@ function trieParTAgs(liste, tableau) {
       for (let value of croixTags) {
         value.addEventListener("click", (e) => {
           const tagsList = value.closest("div");
-          tagsList.style.display = "none";
-          const indexTags = tableau.indexOf(txtValue); // retires la valeur du tableau au click de la croix
+          //tagsList.style.display = "none";
+          tagsList.remove();
+          const indexTags = tableau.indexOf(tagsList.getElementsByClassName("tags_value")[0].innerHTML);
+           // retires la valeur du tableau au click de la croix
           tableau.splice(indexTags, 1);
           console.log(tableau)
           const EffacerTags = algoTags(recipes);
@@ -213,7 +233,7 @@ function matchUstensiles(tabsUstensiles, ustensil) {
   return ustensil.toString().toLowerCase().includes(tabsUstensiles);
 }
 
-function matchIngredisents(tabsIngredient, ingredient) {
+function matchIngredients(tabsIngredient, ingredient) {
 ingredient= ingredient.map(ing=>ing.toLowerCase())
 return tabsIngredient.every(elem=>ingredient.includes(elem.toLowerCase()))}
 
@@ -242,9 +262,8 @@ function algoTags(recettes) {
     let ustensil = recipe.ustensils;
     
     return (
-      
       matchUstensiles(tabsUstensiles, ustensil) &&
-      matchIngredisents(tabsIngredient, ingredient) &&
+      matchIngredients(tabsIngredient, ingredient) &&
       matchAppareils(tabsAppareil, appliance)
       
     );
