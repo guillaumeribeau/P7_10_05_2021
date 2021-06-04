@@ -36,11 +36,15 @@
 .dropdown-content-appareils {
   @include dropdownContent;
   background-color: #68d9a4;
+  scrollbar-color:white #68d9a4;
+  width: 300px;
+  height: 150px;
 }
 
 .dropdown-content-ustensiles {
   @include dropdownContent;
   background-color: #ed6454;
+  scrollbar-color:white #ed6454;;
 }
 
 /* Change color of dropdown links on hover */
@@ -74,7 +78,7 @@ li {
   font-size: 12px;
   color: white;
   list-style: none;
-  padding: 10px;
+  padding: 7px;
   cursor: pointer;
   &:hover {
     color: black;
