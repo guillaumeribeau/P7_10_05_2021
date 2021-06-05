@@ -155,7 +155,7 @@ export function afficherListTrier(liste, search) {
 }
 
 // trie les ingredients
-inputIngredient.addEventListener("keyup", function (e) {
+inputIngredient.addEventListener("keydown", function (e) {
   let search = e.target.value.toLowerCase();
   afficherListTrier(listIngredients, search);
 });
@@ -183,15 +183,15 @@ let tabsUstensiles = [];
 
 /**@param {string} liste des appareils,ingredients ou ustensile */
 /**@param {Array} tableau rempli le tableau app,ustens ou ingre */
-
-function trieParTAgs(liste, tableau) {
+/**@param {String} input permet de vider le champ input */
+function trieParTAgs(liste, tableau,input) {
   let rechercheP = recherchePrincipale.value.toLowerCase(); //recupères la valeur InputP
   for (let value of liste) {
     value.addEventListener("click", () => {
       let txtValue =
         value.textContent.toLowerCase() || value.innerText.toLowerCase();
-      tableau.push(txtValue);
-
+        tableau.push(txtValue); 
+       input.value=''
       console.log(tableau);
       let tagsSeul = algoTags(recipes);
       // algoTags(recipes);
@@ -219,7 +219,7 @@ function trieParTAgs(liste, tableau) {
           const indexTags = tableau.indexOf(
             tagsList.getElementsByClassName("tags_value")[0].innerHTML
           );
-          // retires la valeur du tableau au click de la croix
+        // retires la valeur du tableau au click de la croix
           tableau.splice(indexTags, 1);
           console.log(tableau);
           const EffacerTags = algoTags(recipes);
@@ -229,9 +229,9 @@ function trieParTAgs(liste, tableau) {
     });
   }
 }
-trieParTAgs(listAppareils, tabsAppareil);
-trieParTAgs(listIngredients, tabsIngredient);
-trieParTAgs(listUstensiles, tabsUstensiles);
+trieParTAgs(listAppareils, tabsAppareil,inputAppareil);
+trieParTAgs(listIngredients, tabsIngredient,inputIngredient);
+trieParTAgs(listUstensiles, tabsUstensiles,inputUstensile);
 
 /**
  * @param {tableau} tableau des appareils,ustensile,ingredients rempli aux clics dans la liste
@@ -242,6 +242,9 @@ function matchUstensiles(tabsUstensiles, ustensil) {
   return ustensil.toString().toLowerCase().includes(tabsUstensiles);
 }
 
+function matchAppareils(tabsAppareil, appliance) {
+  return appliance.toString().toLowerCase().includes(tabsAppareil);
+}
 function matchIngredients(tabsIngredient, ingredient) {
   ingredient = ingredient.map((ing) => ing.toLowerCase());
   return tabsIngredient.every((elem) =>
@@ -249,14 +252,14 @@ function matchIngredients(tabsIngredient, ingredient) {
   );
 }
 
-function matchAppareils(tabsAppareil, appliance) {
-  if (tabsAppareil.length === 0) {
-    return appliance.toString().toLowerCase().includes(tabsAppareil);
-  } else if (tabsAppareil.length !== 0) {
-    let last = tabsAppareil[tabsAppareil.length - 1];
-    return appliance.toString().toLowerCase().includes(last);
-  }
-}
+// function matchAppareils(tabsAppareil, appliance) {
+//   if (tabsAppareil.length === 0) {
+//     return appliance.toString().toLowerCase().includes(tabsAppareil);
+//   } else if (tabsAppareil.length !== 0) {
+//     let last = tabsAppareil[tabsAppareil.length - 1];
+//     return appliance.toString().toLowerCase().includes(last);
+//   }
+// }
 
 //----------------------------------------------------------------------------//
 // -----------------------ALGO pour les TAGS---------------------------------//
@@ -273,8 +276,9 @@ function algoTags(recettes) {
     return (
       matchUstensiles(tabsUstensiles, ustensil) &&
       matchIngredients(tabsIngredient, ingredient) &&
-      matchAppareils(tabsAppareil, appliance)
-    );
+       matchAppareils(tabsAppareil, appliance)
+    )
+    
   });
   return filtreTags;
 }
