@@ -375,6 +375,27 @@ li:hover {
   line-height: 12px;
 }
 
+.msg_error {
+  margin-top: 100px;
+  padding: 20px;
+  height: 50px;
+  width: 500px;
+  text-align: center;
+  background-color: lightgrey;
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
+}
+
+.msg_error_input {
+  margin-top: 100px;
+  padding: 20px;
+  height: 50px;
+  width: 500px;
+  text-align: center;
+  background-color: lightgrey;
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
+  height: 100px;
+}
+
 @media only screen and (max-width: 1350px) {
   .recettes__card {
     display: grid;

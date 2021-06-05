@@ -4,6 +4,8 @@ import { AfficherRecettes, filtrerTableauCardTrier } from "./index.js";
 //---------------------------------------------------------//
 //-------------DOM ELEMENTS---------------------------------//
 //-----------------------------------------------------------//
+const main = document.querySelector(".recettes__card");
+
 const dropIngredient = document.getElementById("drop_ingredients");
 const dropAppareil = document.getElementById("drop_appareils");
 const dropUstensile = document.getElementById("drop_ustensiles");
@@ -184,54 +186,65 @@ let tabsUstensiles = [];
 /**@param {string} liste des appareils,ingredients ou ustensile */
 /**@param {Array} tableau rempli le tableau app,ustens ou ingre */
 /**@param {String} input permet de vider le champ input */
-function trieParTAgs(liste, tableau,input) {
-  let rechercheP = recherchePrincipale.value.toLowerCase(); //recupères la valeur InputP
+function trieParTAgs(liste, tableau, input) {
+  //recupères la valeur InputP
+  let rechercheP = recherchePrincipale.value.toLowerCase();
+  // Au click dans chaque listes
   for (let value of liste) {
     value.addEventListener("click", () => {
       let txtValue =
         value.textContent.toLowerCase() || value.innerText.toLowerCase();
-        tableau.push(txtValue); 
-       input.value=''
+      tableau.push(txtValue);
+      input.value = "";
       console.log(tableau);
-      let tagsSeul = algoTags(recipes);
-      // algoTags(recipes);
-      AfficherRecettes(tagsSeul);
-
+      let filtrerParTagsSansRechercheP = algoTags(recipes);
+      AfficherRecettes(filtrerParTagsSansRechercheP);
+      // si trop de critères on affiche message d'erreur
+      if(filtrerParTagsSansRechercheP==''){
+     main.innerHTML=`<div class=msg_error>OUPS... Vous avez saisie trop de critères veuillez en supprimer</div>`
+      }
       // si il y a un filtre de recherche principale
       if (rechercheP.length > 2) {
         let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
         const tagsAvecRechercheP = algoTags(cardRestante);
         AfficherRecettes(tagsAvecRechercheP);
       }
-
+      // permet d'afficher le tags
       let tags = document.querySelector(".tags");
       tags.innerHTML += ` <div class='tags_li'>
        <span class='tags_value'>${txtValue}</span>
        <span class='croix'><i class="far fa-times-circle"></i></span>
        </div>`;
 
+      // Pour chaque click sur la croix des tags
       const croixTags = document.querySelectorAll(".fa-times-circle");
       for (let croix of croixTags) {
         croix.addEventListener("click", (e) => {
+          // retires la valeur du tableau au click de la croix
           const tagsList = croix.closest("div");
-          //tagsList.style.display = "none";
           tagsList.remove();
           const indexTags = tableau.indexOf(
             tagsList.getElementsByClassName("tags_value")[0].innerHTML
           );
-        // retires la valeur du tableau au click de la croix
           tableau.splice(indexTags, 1);
           console.log(tableau);
+          // reinitialise l'affichage au tags précédent
           const EffacerTags = algoTags(recipes);
           AfficherRecettes(EffacerTags);
+          // reinitialise l'affichage à la recherche principale
+          if (rechercheP.length > 2) {
+            let cardRestante = filtrerTableauCardTrier(rechercheP, recipes);
+            const tagsAvecRechercheP = algoTags(cardRestante);
+            AfficherRecettes(tagsAvecRechercheP);
+          }
         });
       }
     });
   }
 }
-trieParTAgs(listAppareils, tabsAppareil,inputAppareil);
-trieParTAgs(listIngredients, tabsIngredient,inputIngredient);
-trieParTAgs(listUstensiles, tabsUstensiles,inputUstensile);
+trieParTAgs(listAppareils, tabsAppareil, inputAppareil);
+trieParTAgs(listIngredients, tabsIngredient, inputIngredient);
+trieParTAgs(listUstensiles, tabsUstensiles, inputUstensile);
 
 /**
  * @param {tableau} tableau des appareils,ustensile,ingredients rempli aux clics dans la liste
@@ -276,9 +289,8 @@ function algoTags(recettes) {
     return (
       matchUstensiles(tabsUstensiles, ustensil) &&
       matchIngredients(tabsIngredient, ingredient) &&
-       matchAppareils(tabsAppareil, appliance)
-    )
-    
+      matchAppareils(tabsAppareil, appliance)
+    );
   });
   return filtreTags;
 }

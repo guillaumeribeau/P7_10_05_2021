@@ -69,7 +69,7 @@ function filtrerTabeauCard(e) {
     // si aucune occurence alors on affiche message erreur
     if (filtrerCard.length === 0) {
       recherchePrincipale.value = " ";
-      main.innerHTML += `<span class='message_erreur'>Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...</span>`;
+      main.innerHTML += `<div class='msg_error_input'>Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...</div>`;
     }
   } else {
     AfficherRecettes(recipes);
