@@ -1,9 +1,9 @@
 import { recipes } from "./recipes.js";
 import {
-  afficherLiAppareil,
-  afficherListTrier,
-  afficherLiUstensil,
-  afficherIngredient,
+  displayListAppliance,
+  SortAllListWithInputTags,
+  displayListUstensils,
+  displayListIngredients,
 } from "./dropdown.js";
 const main = document.querySelector(".recettes__card");
 const recherchePrincipale = document.getElementById("search");
@@ -13,7 +13,7 @@ const recherchePrincipale = document.getElementById("search");
 /** @param {Ojbect} recette les recettes du fichier recipes */
 //------------------------------------------------------------*//
 //Permet de creer les card des recettes
-export function AfficherRecettes(recette) {
+export function displayRecipes(recette) {
   const recetteCard = recette
     .map((recipe) => {
       let ingredientinfos = "";
@@ -54,27 +54,7 @@ export function AfficherRecettes(recette) {
 
   main.innerHTML = recetteCard;
 }
-AfficherRecettes(recipes);
-
-/**
- *
- * @param {e} e evenement au key up
- */
-// permet de faire passer notre algo n1
-function filtrerTabeauCard(e) {
-  let search = e.target.value.toLowerCase();
-  if (search.length > 2) {
-    const filtrerCard = filtrerTableauCardTrier(search, recipes); // algo 1
-    AfficherRecettes(filtrerCard);
-    // si aucune occurence alors on affiche message erreur
-    if (filtrerCard.length === 0) {
-      recherchePrincipale.value = " ";
-      main.innerHTML += `<div class='msg_error_input'>Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...</div>`;
-    }
-  } else {
-    AfficherRecettes(recipes);
-  }
-}
+displayRecipes(recipes);
 
 //---------------------------------------------------------------------//
 //---------------------------FILTRE ALGOS n1 avec filter() le plus performant------------///
@@ -85,7 +65,7 @@ function filtrerTabeauCard(e) {
  */
 
 //retourne le tableau filtrer recherche principale.
-export const filtrerTableauCardTrier = function (search, recette) {
+export const algoSearchFilterMethod = function (search, recette) {
   const filtrerCard = recette.filter((item) => {
     const ingredient = item.ingredients.map((x) => x.ingredient);
 
@@ -99,15 +79,34 @@ export const filtrerTableauCardTrier = function (search, recette) {
   return filtrerCard;
 };
 
+
+/**
+ *
+ * @param {e} e evenement au key up
+ */
+// permet de faire passer notre algo n1
+function filtrerTabeauCard(e) {
+  let search = e.target.value.toLowerCase();
+  if (search.length > 2) {
+    const filtrerCard = algoSearchFilterMethod(search, recipes); // algo 1
+    displayRecipes(filtrerCard);
+    // si aucune occurence alors on affiche message erreur
+    if (filtrerCard.length === 0) {
+      recherchePrincipale.value = " ";
+      main.innerHTML += `<div class='msg_error_input'>Aucune recette ne correspond à votre critères... vous pouvez chercher "tarte aux pommes,"poisson",...</div>`;
+    }
+  } else {
+    displayRecipes(recipes);
+  }
+}
 // Au keyup on execute la fonction filtrer card
 const inputP = document.getElementById("search");
 inputP.addEventListener("keyup", filtrerTabeauCard);
 
 
-//-------------------TRIER LES ELEMENTS DE LA LISTE--------------------//
-//---------------------------------------------------------------------//
-// permet d'afficher seulement les elements de la liste encore présent dans le tableau filtrer
-// par la recherche principale.
+
+//------TRIER LES ELEMENTS DE LA LISTE en fonction de la saisie Input principale----------//
+//----------------------------------------------------------------------------------------//
 const listAppareils = document.querySelectorAll(".list_appareils");
 const listIngredients = document.querySelectorAll(".list_ingredients");
 const listUstensiles = document.querySelectorAll(".list_ustensiles");
@@ -116,7 +115,7 @@ const listUstensiles = document.querySelectorAll(".list_ustensiles");
 inputP.addEventListener("keyup", function (e) {
   let search = e.target.value.toLowerCase();
   // on stockes les cards restante après saisie Input
-  const cardRestante = filtrerTableauCardTrier(search, recipes);
+  const cardRestante = algoSearchFilterMethod(search, recipes);
   const appareilRestant = cardRestante.map((item) =>
     item.appliance.toLowerCase()
   );
@@ -167,8 +166,8 @@ inputP.addEventListener("keyup", function (e) {
       }
     }
   } else {
-    afficherListTrier(listIngredients, search);
-    afficherListTrier(listUstensiles, search);
-    afficherListTrier(listAppareils, search);
+   SortAllListWithInputTags(listIngredients, search);
+   SortAllListWithInputTags(listUstensiles, search);
+   SortAllListWithInputTags(listAppareils, search);
   }
 });
