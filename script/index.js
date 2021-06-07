@@ -56,7 +56,7 @@ export function AfficherRecettes(recette) {
 AfficherRecettes(recipes);
 
 //---------------------------------------------------------------------//
-//---------------------------FILTRE ALGOS n° moins performant------------///
+//---------------------------FILTRE ALGOS n°2 moins performant------------///
 
 function search(e) {
   
