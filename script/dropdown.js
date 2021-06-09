@@ -18,7 +18,7 @@ const inputIngredient = document.getElementById("input_ingredients");
 const inputAppareil = document.getElementById("input_appareils");
 const inputUstensile = document.getElementById("input_ustensiles");
 
-const recherchePrincipale = document.getElementById("search");
+const inputSearch = document.getElementById("search");
 
 //-----------------------------------------------------------------//
 // -----------deroule les dropdown au click---------------------------//
@@ -183,40 +183,30 @@ let tabsAppareil = [];
 let tabsIngredient = [];
 let tabsUstensiles = [];
 
+sortAndDisplayAllTags(listAppareils, tabsAppareil, inputAppareil);
+sortAndDisplayAllTags(listIngredients, tabsIngredient, inputIngredient);
+sortAndDisplayAllTags(listUstensiles, tabsUstensiles, inputUstensile);
+
 /**@param {string} liste des appareils,ingredients ou ustensile */
 /**@param {Array} tableau rempli le tableau app,ustens ou ingre */
 /**@param {String} input permet de vider le champ input */
+/**@param {String} type le type de liste */
 
-function SortAndDisplayAllTAgs(liste, tableau, input) {
-  //recupères la valeur InputP
-  let rechercheP = recherchePrincipale.value.toLowerCase();
+function sortAndDisplayAllTags(liste, tableau, input) {
+  //recupères la valeur
+  let searchInFirstInput = inputSearch.value.toLowerCase();
+  let tags = document.querySelector(".tags");
   // Au click dans chaque listes
   for (let value of liste) {
     value.addEventListener("click", () => {
-      let txtValue =
-        value.textContent.toLowerCase() || value.innerText.toLowerCase();
-      tableau.push(txtValue);
-      input.value = "";
-      console.log(tableau);
-      let filtrerParTagsSansRechercheP = algoTags(recipes);
-      displayRecipes(filtrerParTagsSansRechercheP);
-      // si trop de critères on affiche message d'erreur
-      if (filtrerParTagsSansRechercheP == "") {
-        main.innerHTML = `<div class=msg_error>OUPS... Vous avez saisie trop de critères veuillez en supprimer</div>`;
-      }
-      // si il y a un filtre de recherche principale
-      if (rechercheP.length > 2) {
-        let cardRestante = algoSearchFilterMethod(rechercheP, recipes);
-        const tagsAvecRechercheP = algoTags(cardRestante);
-        displayRecipes(tagsAvecRechercheP);
-      }
-      // permet d'afficher le tags
-      let tags = document.querySelector(".tags");
-      tags.innerHTML += ` <div class='tags_li'>
-       <span class='tags_value'>${txtValue}</span>
-       <span class='croix'><i class="far fa-times-circle"></i></span>
-       </div>`;
-
+      let txtValue = value.textContent.toLowerCase() || value.innerText.toLowerCase();
+        input.value = "";
+      tableau.push(txtValue)
+      let filterOnlyByTags = getTagMatchingAll(recipes);
+      displayRecipes(filterOnlyByTags);
+      reinitializeDisplaySearchInput(searchInFirstInput);
+      createTags(txtValue);
+      displayErrorMessage(filterOnlyByTags);
       // Pour chaque click sur la croix des tags
       const croixTags = document.querySelectorAll(".fa-times-circle");
       for (let croix of croixTags) {
@@ -224,34 +214,33 @@ function SortAndDisplayAllTAgs(liste, tableau, input) {
           // retires la valeur du tableau au click de la croix
           const tagsList = croix.closest("div");
           tagsList.remove();
-          const indexTags = tableau.indexOf(
-            tagsList.getElementsByClassName("tags_value")[0].innerHTML
-          );
-          tableau.splice(indexTags, 1);
-          console.log(tableau);
-        
-          // reinitialise l'affichage au tags précédent
-          const EffacerTags = algoTags(recipes);
-          displayRecipes(EffacerTags);
-          // reinitialise l'affichage à la recherche principale
-          if (rechercheP.length > 2) {
-            let cardRestante = algoSearchFilterMethod(rechercheP, recipes);
-            const tagsAvecRechercheP = algoTags(cardRestante);
-            displayRecipes(tagsAvecRechercheP);
+          if (tagsList.classList.contains("green_appareils")) {
+            const indexTags = tabsAppareil.indexOf(
+              tagsList.getElementsByClassName("tags_value")[0].innerHTML);
+            tabsAppareil.splice(indexTags, 1);
           }
+          if (tagsList.classList.contains("red_ustensils")) {
+            const indexTags = tabsUstensiles.indexOf(
+              tagsList.getElementsByClassName("tags_value")[0].innerHTML);
+            tabsUstensiles.splice(indexTags, 1); 
+          }
+          if (tagsList.classList.contains("blue_ingredients")) {
+            const indexTags = tabsIngredient.indexOf(
+              tagsList.getElementsByClassName("tags_value")[0].innerHTML);
+            tabsIngredient.splice(indexTags, 1);
+       
+          }
+          // reinitialise l'affichage au tags précédent
+          const EffacerTags = getTagMatchingAll(recipes);
+          displayRecipes(EffacerTags);
+          reinitializeDisplaySearchInput(searchInFirstInput);
         });
       }
     });
   }
 }
-SortAndDisplayAllTAgs(listAppareils, tabsAppareil, inputAppareil);
-SortAndDisplayAllTAgs(listIngredients, tabsIngredient, inputIngredient);
-SortAndDisplayAllTAgs(listUstensiles, tabsUstensiles, inputUstensile);
 
-/**
- * @param {tableau} tableau des appareils,ustensile,ingredients rempli aux clics dans la liste
- * @param {string} liste  des appareils,ustensile present sur les recettes
- */
+
 //verifie si dans le tableau on a les ingredients/ appareils/ustensile correspondants
 function matchUstensiles(tabsUstensiles, ustensil) {
   return ustensil.toString().toLowerCase().includes(tabsUstensiles);
@@ -267,6 +256,29 @@ function matchIngredients(tabsIngredient, ingredient) {
   );
 }
 
+//si il y a une recherche sur l'input principale
+function reinitializeDisplaySearchInput(searchInFirstInput) {
+  if (searchInFirstInput.length > 2) {
+    let cardRestante = algoSearchFilterMethod(searchInFirstInput, recipes);
+    const tagsAvecsearchInFirstInput = getTagMatchingAll(cardRestante);
+    displayRecipes(tagsAvecsearchInFirstInput);
+  }
+}
+
+// permet de créer le tags
+function createTags(txtValue) {
+  let tags = document.querySelector(".tags");
+  tags.innerHTML += ` <div class='tags_li'>
+ <span class='tags_value'>${txtValue}</span>
+ <span class='croix'><i class="far fa-times-circle"></i></span>
+ </div>`;
+}
+// si trop de critères on affiche message d'erreur
+function displayErrorMessage(filterOnlyByTags) {
+  if (filterOnlyByTags == "") {
+    main.innerHTML = `<div class=msg_error>OUPS... Vous avez saisie trop de critères veuillez en supprimer</div>`;
+  }
+}
 
 //----------------------------------------------------------------------------//
 // -----------------------ALGO pour les TAGS---------------------------------//
@@ -274,7 +286,7 @@ function matchIngredients(tabsIngredient, ingredient) {
 /**
  * @param {object} recettes recettes total ou filtrer apres input principale
  */
-function algoTags(recettes) {
+function getTagMatchingAll(recettes) {
   const filtreTags = recettes.filter((recipe) => {
     let ingredient = recipe.ingredients.map((x) => x.ingredient);
     let appliance = recipe.appliance;
@@ -289,36 +301,26 @@ function algoTags(recettes) {
   return filtreTags;
 }
 
+
 //----Change la couleur du tags--------------------//
 function changeCouleurTag() {
   for (let value of listAppareils) {
     value.addEventListener("click", () => {
       const tagsValue = document.querySelector(".tags_li");
-      tagsValue.classList.replace("tags_li", "green");
+      tagsValue.classList.replace("tags_li", "green_appareils");
     });
   }
   for (let value of listIngredients) {
     value.addEventListener("click", () => {
       const tagsValue = document.querySelector(".tags_li");
-      tagsValue.classList.replace("tags_li", "blue");
+      tagsValue.classList.replace("tags_li", "blue_ingredients");
     });
   }
   for (let value of listUstensiles) {
     value.addEventListener("click", () => {
       const tagsValue = document.querySelector(".tags_li");
-      tagsValue.classList.replace("tags_li", "red");
+      tagsValue.classList.replace("tags_li", "red_ustensils");
     });
   }
 }
 changeCouleurTag();
-
-
-
-// function matchAppareils(tabsAppareil, appliance) {
-//   if (tabsAppareil.length === 0) {
-//     return appliance.toString().toLowerCase().includes(tabsAppareil);
-//   } else if (tabsAppareil.length !== 0) {
-//     let last = tabsAppareil[tabsAppareil.length - 1];
-//     return appliance.toString().toLowerCase().includes(last);
-//   }
-// }

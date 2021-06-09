@@ -226,40 +226,59 @@ li:hover {
   cursor: pointer;
 }
 
-.green {
+.green_appareils {
   display: flex;
   justify-content: space-between;
   height: 30px;
   width: 150px;
   margin-right: 20px;
+  margin-bottom: 10px;
   color: white;
   padding: 5px;
   border-radius: 5px;
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
   background-color: #68d9a4;
 }
-
-.blue {
-  display: flex;
-  justify-content: space-between;
-  height: 30px;
-  width: 150px;
-  margin-right: 20px;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: #3282f7;
+.green_appareils:hover {
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.7);
 }
 
-.red {
+.blue_ingredients {
   display: flex;
   justify-content: space-between;
   height: 30px;
   width: 150px;
   margin-right: 20px;
+  margin-bottom: 10px;
   color: white;
   padding: 5px;
   border-radius: 5px;
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
+  background-color: #3282f7;
+}
+.blue_ingredients:hover {
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.7);
+}
+
+.red_ustensils {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  width: 150px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
   background-color: #ed6454;
+}
+.red_ustensils:hover {
+  box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.7);
+}
+
+.tags_value {
+  padding-left: 5px;
 }
 
 .icone {
@@ -358,7 +377,7 @@ li:hover {
   font-family: "Lato";
   font-size: 10px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 9px;
   color: #000000;
   padding-bottom: 5px;
@@ -394,6 +413,11 @@ li:hover {
   background-color: lightgrey;
   box-shadow: 5px 3px 7px 2px rgba(0, 0, 0, 0.46);
   height: 100px;
+}
+
+strong {
+  font-weight: 700;
+  padding-right: 2px;
 }
 
 @media only screen and (max-width: 1350px) {

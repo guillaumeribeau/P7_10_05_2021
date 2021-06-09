@@ -107,17 +107,20 @@ li {
   cursor: pointer;
 }
 
-.green {
+.green_appareils {
   @include divtags;
   background-color: #68d9a4;
 }
 
-.blue {
+.blue_ingredients {
   @include divtags;
   background-color: #3282f7;
 }
 
-.red {
+.red_ustensils {
   @include divtags;
   background-color: #ed6454;
+}
+.tags_value{
+  padding-left:5px;
 }

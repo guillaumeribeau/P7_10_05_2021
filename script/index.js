@@ -1,10 +1,6 @@
 import { recipes } from "./recipes.js";
-import {
-  displayListAppliance,
-  SortAllListWithInputTags,
-  displayListUstensils,
-  displayListIngredients,
-} from "./dropdown.js";
+import { SortAllListWithInputTags } from "./dropdown.js";
+
 const main = document.querySelector(".recettes__card");
 const recherchePrincipale = document.getElementById("search");
 
@@ -20,12 +16,12 @@ export function displayRecipes(recette) {
       const ingredient = recipe.ingredients.map((ingredient) => {
         if (ingredient.quantity) {
           if (ingredient.unit && ingredient.quantity) {
-            ingredientinfos += `<li>${ingredient.ingredient}:${ingredient.quantity}${ingredient.unit}</li>`;
+            ingredientinfos += `<li><strong>${ingredient.ingredient}:</strong>${ingredient.quantity}${ingredient.unit}</li>`;
           } else {
-            ingredientinfos += `<li>${ingredient.ingredient}:${ingredient.quantity}</li>`;
+            ingredientinfos += `<li><strong>${ingredient.ingredient}:</strong>${ingredient.quantity}</li>`;
           }
         } else {
-          ingredientinfos += `<li>${ingredient.ingredient}</li>`;
+          ingredientinfos += `<li><strong>${ingredient.ingredient}</strong></li>`;
         }
       });
       return `<article class='col-3'>
@@ -56,14 +52,13 @@ export function displayRecipes(recette) {
 }
 displayRecipes(recipes);
 
-//---------------------------------------------------------------------//
+
 //---------------------------FILTRE ALGOS n1 avec filter() le plus performant------------///
 
 /**
  * @param {String} search la rechercher taper dans Input principale
  * @param {Object} recette les recettes total ou celle restante
  */
-
 //retourne le tableau filtrer recherche principale.
 export const algoSearchFilterMethod = function (search, recette) {
   const filtrerCard = recette.filter((item) => {
@@ -80,12 +75,10 @@ export const algoSearchFilterMethod = function (search, recette) {
 };
 
 
-/**
- *
- * @param {e} e evenement au key up
- */
-// permet de faire passer notre algo n1
-function filtrerTabeauCard(e) {
+const inputP = document.getElementById("search");
+inputP.addEventListener("keyup", filterRecipesWithInputSearch);
+
+function filterRecipesWithInputSearch(e) {
   let search = e.target.value.toLowerCase();
   if (search.length > 2) {
     const filtrerCard = algoSearchFilterMethod(search, recipes); // algo 1
@@ -99,9 +92,6 @@ function filtrerTabeauCard(e) {
     displayRecipes(recipes);
   }
 }
-// Au keyup on execute la fonction filtrer card
-const inputP = document.getElementById("search");
-inputP.addEventListener("keyup", filtrerTabeauCard);
 
 
 
@@ -166,8 +156,8 @@ inputP.addEventListener("keyup", function (e) {
       }
     }
   } else {
-   SortAllListWithInputTags(listIngredients, search);
-   SortAllListWithInputTags(listUstensiles, search);
-   SortAllListWithInputTags(listAppareils, search);
+    SortAllListWithInputTags(listIngredients, search);
+    SortAllListWithInputTags(listUstensiles, search);
+    SortAllListWithInputTags(listAppareils, search);
   }
 });

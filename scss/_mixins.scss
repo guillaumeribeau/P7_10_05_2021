@@ -54,9 +54,14 @@
   height: 30px;
   width: 150px;
   margin-right: 20px;
+  margin-bottom: 10px;
   color: white;
   padding: 5px;
   border-radius: 5px;
+  box-shadow:5px 3px 7px 2px rgba(0, 0, 0, 0.46);
+  &:hover{
+    box-shadow:5px 3px 7px 2px rgba(0, 0, 0, 0.70);
+  }
 }
 
 @mixin messageError {
