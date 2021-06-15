@@ -31,10 +31,10 @@ export function displayRecipes(recette) {
 <div class='infos_principale'>
 <span class='title__recette'>${recipe.name}</span>
 
-<div>
+ <div class='time_recipes'>
  <span class='time__logo'><i class="far fa-clock"></i></span>
  <span class='time'>${recipe.time}min</span>
-</div>
+ </div>
 </div>
   
  <div class="contenu">

@@ -334,9 +334,10 @@ li:hover {
 .infos_principale {
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
   padding-top: 20px;
   font-family: "Lato";
-  font-size: 18px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 22px;
@@ -344,15 +345,23 @@ li:hover {
 }
 
 .title__recette {
-  margin-left: 20px;
+  margin-left: 10px;
+  text-overflow: ellipsis;
+}
+
+.time_recipes {
+  display: flex;
+  justify-content: space-between;
 }
 
 .time {
-  margin-right: 20px;
+  margin-right: 5px;
+  margin-left: 5px;
+  font-size: 15px;
 }
 
 .bi-clock {
-  font-size: 20px;
+  font-size: 15px;
   margin-right: 5px;
 }
 
@@ -371,7 +380,7 @@ li:hover {
 .ingredient li {
   display: inline;
   text-overflow: ellipsis;
-  margin-left: 10px;
+  margin-left: 5px;
   margin-right: 20px;
   margin-bottom: 0px;
   font-family: "Lato";
@@ -385,7 +394,7 @@ li:hover {
 
 .recettes {
   overflow-wrap: break-word;
-  margin-top: 5px;
+  margin-top: 15px;
   margin-bottom: 10px;
   font-family: "Roboto";
   font-size: 12px;
